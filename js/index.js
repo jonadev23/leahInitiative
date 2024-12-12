@@ -40,10 +40,64 @@
 
 // carousel usage
 
+//put back if fails
+// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
+//   try {
+//     const parentResponse = await fetch(
+//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
+//     );
+//     const parentCategory = await parentResponse.json();
+
+//     if (parentCategory.length > 0) {
+//       const parentId = parentCategory[0].id;
+
+//       const subcategoryResponse = await fetch(
+//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
+//       );
+//       const subcategories = await subcategoryResponse.json();
+
+//       if (subcategories.length > 0) {
+//         const subcategoryId = subcategories[0].id;
+
+//         const postsResponse = await fetch(
+//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
+//         );
+//         const posts = await postsResponse.json();
+
+//         // Fetch tag details for each post
+//         for (const post of posts) {
+//           if (post.tags && post.tags.length > 0) {
+//             const tagIds = post.tags.join(",");
+//             const tagsResponse = await fetch(
+//               `http://localhost/climateOrg/wp-json/wp/v2/tags?include=${tagIds}`
+//             );
+//             const tags = await tagsResponse.json();
+//             post.tagDetails = tags; // Add the tags details to each post
+//           }
+//         }
+
+//         return posts; // Return the posts array with tags
+//       } else {
+//         console.error("Subcategory not found under the specified parent");
+//         return [];
+//       }
+//     } else {
+//       console.error("Parent category not found");
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//   }
+// }
+
+// Define the base URL manually for different environments
+const BASE_URL = "https://admin.leahinitiative.org"; // Change this for staging or production
+// http://localhost/climateOrg
+//https://admin.leahinitiative.org
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
-      `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
+      `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
     const parentCategory = await parentResponse.json();
 
@@ -51,7 +105,7 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
       const parentId = parentCategory[0].id;
 
       const subcategoryResponse = await fetch(
-        `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
+        `${BASE_URL}/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
       );
       const subcategories = await subcategoryResponse.json();
 
@@ -59,7 +113,7 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
         const subcategoryId = subcategories[0].id;
 
         const postsResponse = await fetch(
-          `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
+          `${BASE_URL}/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
         );
         const posts = await postsResponse.json();
 
@@ -68,7 +122,7 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
           if (post.tags && post.tags.length > 0) {
             const tagIds = post.tags.join(",");
             const tagsResponse = await fetch(
-              `http://localhost/climateOrg/wp-json/wp/v2/tags?include=${tagIds}`
+              `${BASE_URL}/wp-json/wp/v2/tags?include=${tagIds}`
             );
             const tags = await tagsResponse.json();
             post.tagDetails = tags; // Add the tags details to each post
