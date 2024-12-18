@@ -1,0 +1,13 @@
+
+#contactDetails{
+    display: block;
+}
+
+
+  @media only screen and (min-width: 768px) {
+    /* For mobile phones: */
+    #contactDetails{
+        display: flex;
+    }
+    
+  }
