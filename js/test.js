@@ -86,3 +86,5 @@ console.log(Math.floor(Math.random() * 10) + 1); //returns a random number betwe
 function getRandomInt(min,max){
   return Math.random() 
 }
+
+

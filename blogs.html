@@ -107,15 +107,16 @@
       class="body-wrapper float-menu"
       data-home="https://demo.goodlayers.com/greennature/"
     >
-      <header
+    <header
         class="greennature-header-wrapper header-style-5-wrapper greennature-header-with-top-bar"
       >
         <!-- top navigation -->
         <div class="top-navigation-wrapper">
           <div class="top-navigation-container container">
             <div class="top-navigation-left">
-              <div class="top-navigation-left-text">
-                Phone : +1800-222-3333      Email : contact@greennaturewp.com
+              <div style="display: flex" class="top-navigation-left-text">
+                Phone : <span id="contact"></span>&nbsp;&nbsp;&nbsp; Email :
+                <span id="email"></span>
               </div>
             </div>
             <div class="top-navigation-right">
@@ -159,8 +160,10 @@
             <div class="greennature-header-inner-overlay"></div>
             <!-- logo -->
             <div class="greennature-logo">
-              <div class="greennature-logo-inner">
-                <a href="index.html"> <img src="images/logo.png" alt="" /> </a>
+              <div class="greennature-logo-inner" style="max-width: 110px">
+                <a id="logo" href="index.html">
+                  <!-- <img src="images/logo.png" alt="" /> -->
+                </a>
               </div>
               <div
                 class="greennature-responsive-navigation dl-menuwrapper"
@@ -172,7 +175,7 @@
                   class="dl-menu greennature-main-mobile-menu"
                 >
                   <li
-                    class="menu-item menu-item-home page_item page-item-5680 current_page_item"
+                    class="menu-item menu-item-home current-menu-item page_item page-item-5680 current_page_item"
                   >
                     <a href="index.html" aria-current="page">Home</a>
                   </li>
@@ -180,38 +183,40 @@
                     <a href="#">Pages</a>
                     <ul class="dl-submenu">
                       <li class="menu-item">
-                        <a href="act-now.html">Act Now</a>
+                        <a href="about.html">About Us</a>
                       </li>
                       <li class="menu-item">
-                        <a href="about-1.html">About Us 1</a>
+                        <a href="initiatives.html">Initiatives</a>
                       </li>
                       <li class="menu-item">
-                        <a href="about-2.html">About Us 2</a>
+                        <a href="get-involved.html">Get Involved</a>
                       </li>
+                     
                       <li class="menu-item">
+                        <a href="events.html">Events</a>
+                      </li>
+                      <!-- <li class="menu-item">
                         <a href="service.html">Service</a>
                       </li>
+                      
+                      <li class="menu-item"><a href="qa.html">Q&#038;A</a></li> -->
                       <li class="menu-item">
-                        <a href="personnel-2.html">Personnel</a>
+                        <a href="contact-page.html">Contact Page</a>
                       </li>
-                      <li class="menu-item"><a href="qa.html">Q&#038;A</a></li>
-                      <li class="menu-item">
-                        <a href="contact-page.html">Contact Page 1</a>
-                      </li>
-                      <li class="menu-item">
+                      <!-- <li class="menu-item">
                         <a href="contact-page-2.html">Contact Page 2</a>
-                      </li>
+                      </li> -->
                       <li class="menu-item menu-item-12">
                         <a href="404error.html">404 Page</a>
                       </li>
-                      <li class="menu-item">
+                      <!-- <li class="menu-item">
                         <a href="testimonial.html">Testimonial</a>
-                      </li>
+                      </li> -->
                       <li class="menu-item menu-item-has-children">
-                        <a href="gallery-3-columns-without-caption.html"
+                        <a href="gallery.html"
                           >Gallery</a
                         >
-                        <ul class="dl-submenu">
+                        <!-- <ul class="dl-submenu">
                           <li class="menu-item">
                             <a href="gallery-2-columns-without-caption.html"
                               >Gallery 2 Columns Without Caption</a
@@ -252,15 +257,15 @@
                               >Gallery 5 Columns With Caption</a
                             >
                           </li>
-                        </ul>
+                        </ul> -->
                       </li>
                     </ul>
                   </li>
                   <li class="menu-item menu-item-has-children">
-                    <a href="portfolio-grid-3-columns-no-space.html"
-                      >Portfolio</a
+                    <a href="projects.html"
+                      >Projects</a
                     >
-                    <ul class="dl-submenu">
+                    <!-- <ul class="dl-submenu">
                       <li class="menu-item menu-item-has-children">
                         <a href="portfolio-grid-3-columns.html"
                           >Portfolio Classic</a
@@ -345,11 +350,9 @@
                           </li>
                         </ul>
                       </li>
-                    </ul>
+                    </ul> -->
                   </li>
-                  <li
-                    class="menu-item current-menu-item menu-item-has-children"
-                  >
+                  <li class="menu-item menu-item-has-children">
                     <a href="blog-full-with-right-sidebar.html">Blog</a>
                     <ul class="dl-submenu">
                       <li class="menu-item">
@@ -412,7 +415,9 @@
                 id="greennature-main-navigation"
               >
                 <ul id="menu-main-menu-1" class="sf-menu greennature-main-menu">
-                  <li class="menu-item menu-item-home greennature-normal-menu">
+                  <li
+                    class="menu-item menu-item-home current-menu-item greennature-normal-menu"
+                  >
                     <a href="index.html"><i class="fa fa-home"></i>Home</a>
                   </li>
                   <li
@@ -422,38 +427,41 @@
                       ><i class="fa fa-file-text-o"></i>Pages</a
                     >
                     <ul class="sub-menu">
+                     
                       <li class="menu-item">
-                        <a href="act-now.html">Act Now</a>
+                        <a href="about.html">About Us</a>
                       </li>
                       <li class="menu-item">
-                        <a href="about-1.html">About Us 1</a>
+                        <a href="initiatives.html">Initiatives</a>
                       </li>
                       <li class="menu-item">
-                        <a href="about-2.html">About Us 2</a>
+                        <a href="get-involved.html">Get Involved</a>
                       </li>
-                      <li class="menu-item">
+                      
+                       <li class="menu-item">
+                        <a href="events.html">Events</a>
+                      </li>
+                      <!-- <li class="menu-item">
                         <a href="service.html">Service</a>
                       </li>
+                     
+                      <li class="menu-item"><a href="qa.html">Q&#038;A</a></li> -->
                       <li class="menu-item">
-                        <a href="personnel-2.html">Personnel</a>
-                      </li>
-                      <li class="menu-item"><a href="qa.html">Q&#038;A</a></li>
-                      <li class="menu-item">
-                        <a href="contact-page.html">Contact Page 1</a>
+                        <a href="contact-page.html">Contact Page</a>
                       </li>
                       <li class="menu-item">
                         <a href="404error.html">404 Page</a>
                       </li>
-                      <li class="menu-item">
+                      <!-- <li class="menu-item">
                         <a href="testimonial.html">Testimonial</a>
-                      </li>
+                      </li> -->
                       <li class="menu-item menu-item-has-children">
                         <a
-                          href="gallery-3-columns-without-caption.html"
+                          href="gallery.html"
                           class="sf-with-ul-pre"
                           >Gallery</a
                         >
-                        <ul class="sub-menu">
+                        <!-- <ul class="sub-menu">
                           <li class="menu-item">
                             <a href="gallery-2-columns-without-caption.html"
                               >Gallery 2 Columns Without Caption</a
@@ -494,7 +502,7 @@
                               >Gallery 5 Columns With Caption</a
                             >
                           </li>
-                        </ul>
+                        </ul> -->
                       </li>
                     </ul>
                   </li>
@@ -502,11 +510,11 @@
                     class="menu-item menu-item-has-childrenmenu-item menu-item-has-children greennature-mega-menu"
                   >
                     <a
-                      href="portfolio-grid-3-columns-no-space.html"
+                      href="projects.html"
                       class="sf-with-ul-pre"
-                      ><i class="fa fa-globe"></i>Portfolio</a
+                      ><i class="fa fa-globe"></i>Projects</a
                     >
-                    <div class="sf-mega">
+                    <!-- <div class="sf-mega">
                       <ul class="sub-menu">
                         <li
                           class="menu-item menu-item-has-children"
@@ -609,10 +617,10 @@
                           </ul>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </li>
                   <li
-                    class="menu-item current-menu-item menu-item-has-childrenmenu-item menu-item-has-children greennature-normal-menu"
+                    class="menu-item menu-item-has-childrenmenu-item menu-item-has-children greennature-normal-menu"
                   >
                     <a
                       href="blog-full-with-right-sidebar.html"
@@ -1052,12 +1060,12 @@
               class="widget widget_text greennature-item greennature-widget"
             >
               <div class="textwidget">
-                <p>
-                  <img
+                <p id="logo-footer">
+                  <!-- <img
                     src="upload/logo-light.png"
                     style="width: 170px"
                     alt=""
-                  />
+                  /> -->
                 </p>
                 <p>
                   Cum sociis natoque penatibus et magnis dis parturient montes,
@@ -1469,7 +1477,8 @@
       </div>
     </div>
     <!-- body-wrapper -->
-    <script src="js/blogs.js"></script>
+    <script type="module" src="js/general.js"></script>
+    <script type="module" src="js/blogs.js"></script>
     <script type="text/javascript" src="js/jquery/jquery.js"></script>
     <script
       type="text/javascript"

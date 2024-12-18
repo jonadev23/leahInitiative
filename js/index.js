@@ -1,104 +1,14 @@
-// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
-//   try {
-//     // Fetch the parent category by slug
-//     const parentResponse = await fetch(
-//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
-//     );
-//     const parentCategory = await parentResponse.json();
-
-//     if (parentCategory.length > 0) {
-//       const parentId = parentCategory[0].id;
-
-//       // Fetch the specific subcategory by slug and parent ID
-//       const subcategoryResponse = await fetch(
-//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
-//       );
-//       const subcategories = await subcategoryResponse.json();
-
-//       if (subcategories.length > 0) {
-//         const subcategoryId = subcategories[0].id;
-
-//         // Fetch all posts under the subcategory
-//         const postsResponse = await fetch(
-//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
-//         );
-//         const posts = await postsResponse.json();
-
-//         return posts; // Return the posts array
-//       } else {
-//         console.error("Subcategory not found under the specified parent");
-//         return [];
-//       }
-//     } else {
-//       console.error("Parent category not found");
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//   }
-// }
-
-// carousel usage
-
-//put back if fails
-// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
-//   try {
-//     const parentResponse = await fetch(
-//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
-//     );
-//     const parentCategory = await parentResponse.json();
-
-//     if (parentCategory.length > 0) {
-//       const parentId = parentCategory[0].id;
-
-//       const subcategoryResponse = await fetch(
-//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
-//       );
-//       const subcategories = await subcategoryResponse.json();
-
-//       if (subcategories.length > 0) {
-//         const subcategoryId = subcategories[0].id;
-
-//         const postsResponse = await fetch(
-//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
-//         );
-//         const posts = await postsResponse.json();
-
-//         // Fetch tag details for each post
-//         for (const post of posts) {
-//           if (post.tags && post.tags.length > 0) {
-//             const tagIds = post.tags.join(",");
-//             const tagsResponse = await fetch(
-//               `http://localhost/climateOrg/wp-json/wp/v2/tags?include=${tagIds}`
-//             );
-//             const tags = await tagsResponse.json();
-//             post.tagDetails = tags; // Add the tags details to each post
-//           }
-//         }
-
-//         return posts; // Return the posts array with tags
-//       } else {
-//         console.error("Subcategory not found under the specified parent");
-//         return [];
-//       }
-//     } else {
-//       console.error("Parent category not found");
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//   }
-// }
+import { ENV_URL } from "./config.js";
 
 // Define the base URL manually for different environments
-const BASE_URL = "https://admin.leahinitiative.org/index.php"; // Change this for staging or production
-// http://localhost/climateOrg
-//https://admin.leahinitiative.org/index.php
+const BASE_URL = ENV_URL; 
+
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
+       
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -539,3 +449,96 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
     console.log("No posts found in the specified subcategory");
   }
 });
+
+
+// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
+//   try {
+//     // Fetch the parent category by slug
+//     const parentResponse = await fetch(
+//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
+//     );
+//     const parentCategory = await parentResponse.json();
+
+//     if (parentCategory.length > 0) {
+//       const parentId = parentCategory[0].id;
+
+//       // Fetch the specific subcategory by slug and parent ID
+//       const subcategoryResponse = await fetch(
+//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
+//       );
+//       const subcategories = await subcategoryResponse.json();
+
+//       if (subcategories.length > 0) {
+//         const subcategoryId = subcategories[0].id;
+
+//         // Fetch all posts under the subcategory
+//         const postsResponse = await fetch(
+//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
+//         );
+//         const posts = await postsResponse.json();
+
+//         return posts; // Return the posts array
+//       } else {
+//         console.error("Subcategory not found under the specified parent");
+//         return [];
+//       }
+//     } else {
+//       console.error("Parent category not found");
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//   }
+// }
+
+// carousel usage
+
+//put back if fails
+// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
+//   try {
+//     const parentResponse = await fetch(
+//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
+//     );
+//     const parentCategory = await parentResponse.json();
+
+//     if (parentCategory.length > 0) {
+//       const parentId = parentCategory[0].id;
+
+//       const subcategoryResponse = await fetch(
+//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
+//       );
+//       const subcategories = await subcategoryResponse.json();
+
+//       if (subcategories.length > 0) {
+//         const subcategoryId = subcategories[0].id;
+
+//         const postsResponse = await fetch(
+//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
+//         );
+//         const posts = await postsResponse.json();
+
+//         // Fetch tag details for each post
+//         for (const post of posts) {
+//           if (post.tags && post.tags.length > 0) {
+//             const tagIds = post.tags.join(",");
+//             const tagsResponse = await fetch(
+//               `http://localhost/climateOrg/wp-json/wp/v2/tags?include=${tagIds}`
+//             );
+//             const tags = await tagsResponse.json();
+//             post.tagDetails = tags; // Add the tags details to each post
+//           }
+//         }
+
+//         return posts; // Return the posts array with tags
+//       } else {
+//         console.error("Subcategory not found under the specified parent");
+//         return [];
+//       }
+//     } else {
+//       console.error("Parent category not found");
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//   }
+// }

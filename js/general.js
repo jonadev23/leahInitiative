@@ -1,15 +1,21 @@
+import { ENV_URL } from "./config.js";
+
+// Define the base URL manually for different environments
+const BASE_URL = ENV_URL; 
+
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
-      `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
+      `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
+       
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
       const parentId = parentCategory[0].id;
 
       const subcategoryResponse = await fetch(
-        `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
+        `${BASE_URL}/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
       );
       const subcategories = await subcategoryResponse.json();
 
@@ -17,7 +23,7 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
         const subcategoryId = subcategories[0].id;
 
         const postsResponse = await fetch(
-          `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
+          `${BASE_URL}/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
         );
         const posts = await postsResponse.json();
 
@@ -26,7 +32,7 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
           if (post.tags && post.tags.length > 0) {
             const tagIds = post.tags.join(",");
             const tagsResponse = await fetch(
-              `http://localhost/climateOrg/wp-json/wp/v2/tags?include=${tagIds}`
+              `${BASE_URL}/wp-json/wp/v2/tags?include=${tagIds}`
             );
             const tags = await tagsResponse.json();
             post.tagDetails = tags; // Add the tags details to each post
@@ -46,10 +52,25 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
     console.error("Error fetching posts:", error);
   }
 }
-
-//logo section
+//logo-navbar section
 getPostsBySubcategory("general-content", "logo").then((posts) => {
   const contentWrapper = document.getElementById("logo");
+
+  if (posts.length > 0) {
+    contentWrapper.innerHTML = ` <img
+                    src=${posts[0]._embedded["wp:featuredmedia"][0].source_url}
+                    style="width: 170px"
+                    alt=""
+                  />
+      `;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//logo-footer section
+getPostsBySubcategory("general-content", "logo").then((posts) => {
+  const contentWrapper = document.getElementById("logo-footer");
 
   if (posts.length > 0) {
     contentWrapper.innerHTML = ` <img
