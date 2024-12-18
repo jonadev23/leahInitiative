@@ -91,9 +91,9 @@
 // }
 
 // Define the base URL manually for different environments
-const BASE_URL = "https://admin.leahinitiative.org"; // Change this for staging or production
+const BASE_URL = "https://admin.leahinitiative.org/index.php"; // Change this for staging or production
 // http://localhost/climateOrg
-//https://admin.leahinitiative.org
+//https://admin.leahinitiative.org/index.php
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
