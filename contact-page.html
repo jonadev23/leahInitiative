@@ -31,6 +31,31 @@
     <link rel='stylesheet' href='css/master-custom.css' type='text/css' media='all' />
 
     <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- script for EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+              publicKey: "FOHiZtlGuJIrVuyAn",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // these IDs from the previous steps
+                emailjs.sendForm('service_ff8r68d', 'contact_form', this)
+                    .then(() => {
+                        console.log('SUCCESS!');
+                    }, (error) => {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
 </head>
 
 <body data-rsssl=1 class="home page-template-default page page-id-5680 _masterslider _msp_version_3.2.7 woocommerce-no-js">
@@ -655,14 +680,14 @@
                                     <h5 class="greennature-heading-shortcode " style="font-weight: bold;">Please fulfil the form below. </h5>
                                     <p> <span class="clear"></span><span class="greennature-space" style="margin-top: 25px; display: block;"></span>
                                         <div role="form" class="wpcf7" id="wpcf7-f4-o1" lang="en-US" dir="ltr">
-                                            <form class="quform" action="plugins/quform/process.php" method="post" enctype="multipart/form-data" onclick="">
+                                            <form id="contact-form" class="quform" >
 
                                                 <div class="quform-elements">
                                                     <div class="quform-element">
                                                         <p>
                                                             <br>
                                                             <span class="wpcf7-form-control-wrap your-name">
-                                                                <input id="name" type="text" name="name" size="40" class="input1" aria-required="true" aria-invalid="false" placeholder="Name*">
+                                                                <input id="name" type="text" name="user_name" size="40" class="input1" aria-required="true" aria-invalid="false" placeholder="Name*">
                                                             </span> 
                                                         </p>
                                                     </div>
@@ -670,7 +695,7 @@
                                                         <p>
                                                             <br>
                                                             <span class="wpcf7-form-control-wrap your-email">
-                                                                <input id="email" type="text" name="email" size="40" class="input1" aria-required="true" aria-invalid="false" placeholder="Email*">
+                                                                <input id="email" type="text" name="user_email" size="40" class="input1" aria-required="true" aria-invalid="false" placeholder="Email*">
                                                             </span> 
                                                         </p>
                                                     </div>
