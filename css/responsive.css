@@ -9,5 +9,23 @@
     #contactDetails{
         display: flex;
     }
+      
+  }
+
+  #greennature-parallax-wrapper-3{
+    background-size: auto;
+    background-position: center;
+    
     
   }
+
+
+ 
+
+@media only screen and (min-width: 768px) {
+  
+  #greennature-parallax-wrapper-3{
+    background-size: cover;
+    
+  }
+} 

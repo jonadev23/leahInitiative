@@ -375,8 +375,7 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
       (post) => post.title.rendered === "Background"
     );
     statisticsSection.style.backgroundImage = `url(${background[0]._embedded["wp:featuredmedia"][0].source_url})`;
-    statisticsSection.style.backgroundSize = "cover";
-    statisticsSection.style.backgroundPosition = "center";
+    
 
     document.getElementById("stunning-item-title").innerHTML =
       background[0].content.rendered;
