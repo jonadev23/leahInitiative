@@ -3,6 +3,8 @@ import { ENV_URL } from "./config.js";
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL; 
 
+
+
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
@@ -51,6 +53,8 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   } catch (error) {
     console.error("Error fetching posts:", error);
   }
+
+  
 }
 
 getPostsBySubcategory("homepage", "slider").then((posts) => {
@@ -75,7 +79,8 @@ getPostsBySubcategory("homepage", "slider").then((posts) => {
     sliderTwo.style.backgroundSize = "cover";
     sliderTwo.style.backgroundPosition = "center";
     sliderTwoText.innerHTML = posts[1].title.rendered;
-    // console.log(posts[1].content.rendered);
+   
+   
     sliderTwoText2.innerHTML = posts[1].content.rendered;
     //third
     sliderThree.style.backgroundImage = `url(${posts[2]._embedded["wp:featuredmedia"][0].source_url})`;
@@ -172,6 +177,9 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
   if (posts.length > 0) {
     posts.reverse();
     posts.forEach((post) => {
+      const content = post.content.rendered;
+
+      console.log(content)
       projectSection.innerHTML += `<div class="three columns">
                           <div
                             class="greennature-item greennature-portfolio-item greennature-classic-portfolio"
@@ -181,8 +189,11 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
                             >
                               <div
                                 class="portfolio-thumbnail greennature-image"
+                                style = "width:100%;max-height:300px; position:relative"
                               >
+                               <div style="position: absolute; inset: 0; background-color: black;opacity: 0.3;"></div>
                                 <img
+                                id="hover-image"
                                   src=${
                                     post._embedded["wp:featuredmedia"][0]
                                       .source_url
@@ -401,7 +412,8 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
                       />
                       <div
                         class="greennature-skill-item-title"
-                        style="color: #5dc269"
+                        id="statistics-text"
+                        
                       >
                         ${post.content.rendered}
                       </div>

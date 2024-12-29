@@ -18,14 +18,102 @@
     
     
   }
+#statistics-section{
+  display: flex;
+  flex-basis: 1/2%;
+  
+}
+
+  #statistics-text{
+  color: #5dc269;
+  }
+
+  .greennature-skill-item-wrapper .greennature-skill-item-title {
+    font-size: 20px;
+    margin-bottom: 17px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  #stunning-item-title{
+    font-size: 20px;
+  }
+element {
+  color: #ffffff;
+
+}
+.greennature-skill-item-wrapper .greennature-skill-item-caption {
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+}
+
+.greennature-skill-item-wrapper img {
+  margin: 0px auto 30px;
+  display: block;
+  max-width: 30px;
+}
 
 
- 
-
+.greennature-stunning-item.greennature-stunning-center .stunning-item-caption {
+  font-size: 15px;
+}
 @media only screen and (min-width: 768px) {
   
   #greennature-parallax-wrapper-3{
     background-size: cover;
     
   }
+
+  #statistics-text{
+    color: red;
+  }
+
+  .greennature-skill-item-wrapper .greennature-skill-item-title {
+    font-size: 37px;
+    margin-bottom: 17px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  #statistics-section{
+    display: block;
+  }
+
+  
+element {
+  color: #ffffff;
+
+}
+.greennature-skill-item-wrapper .greennature-skill-item-caption {
+  font-size: 17px;
+
+  text-transform: uppercase;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+}
+
+.greennature-skill-item-wrapper img {
+  margin: 0px auto 30px;
+  display: block;
+  max-width: 62px;
+}
+
+#stunning-item-title{
+  font-size: 41px;
+}
+
+.greennature-stunning-item.greennature-stunning-center .stunning-item-caption {
+  font-size: 21px;
+}
 } 
+
+#hover-image:hover{
+  scale:1.1;
+  cursor: pointer;
+}
