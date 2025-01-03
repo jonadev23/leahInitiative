@@ -88,3 +88,10 @@ function getRandomInt(min,max){
 }
 
 
+function trimText(text){
+
+}
+
+message = "<p>Remove the paragraph</p>"
+const replacedStr = message.replace(/<p>/g,"")
+console.log(replacedStr);

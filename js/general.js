@@ -1,5 +1,5 @@
 import { ENV_URL } from "./config.js";
-
+import { mapMonth,mapDate,mapYear } from "./trim.js";
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL; 
 
@@ -71,7 +71,7 @@ getPostsBySubcategory("general-content", "logo").then((posts) => {
 //logo-footer section
 getPostsBySubcategory("general-content", "logo").then((posts) => {
   const contentWrapper = document.getElementById("logo-footer");
-
+  const footerContent = document.getElementById("footer-content");
   if (posts.length > 0) {
     contentWrapper.innerHTML = ` <img
                     src=${posts[0]._embedded["wp:featuredmedia"][0].source_url}
@@ -79,6 +79,29 @@ getPostsBySubcategory("general-content", "logo").then((posts) => {
                     alt=""
                   />
       `;
+      footerContent.innerHTML = `<div>${posts[0].content.rendered}`
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//contact-footer section
+getPostsBySubcategory("general-content", "contact-general-content").then((posts) => {
+  const contentWrapper = document.getElementById("contact-footer");
+
+  if (posts.length > 0) {
+    contentWrapper.innerHTML = `<div>${posts[0].content.rendered}</div>`;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//address section
+getPostsBySubcategory("general-content", "address").then((posts) => {
+  const contentWrapper = document.getElementById("address");
+
+  if (posts.length > 0) {
+    contentWrapper.innerHTML = `<div>${posts[0].content.rendered}</div>`;
   } else {
     console.log("No posts found in the specified subcategory");
   }
@@ -97,7 +120,7 @@ getPostsBySubcategory("general-content", "contact-general-content").then(
   }
 );
 
-//contact section
+//email section
 getPostsBySubcategory("general-content", "email").then((posts) => {
   const contentWrapper = document.getElementById("email");
 
@@ -110,3 +133,85 @@ getPostsBySubcategory("general-content", "email").then((posts) => {
 
 
 
+//email section
+getPostsBySubcategory("general-content", "email").then((posts) => {
+  const contentWrapper = document.getElementById("email-footer");
+
+  if (posts.length > 0) {
+    contentWrapper.innerHTML = `<span>${posts[0].content.rendered}</span>`;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+
+//recent news section
+getPostsBySubcategory("blogs", "content").then((posts) => {
+  const projectSection = document.getElementById("recent-footer");
+  if (posts.length > 0) {
+    
+      const filteredPost = posts.splice(0,2)
+   
+    
+  filteredPost.forEach((post) => {
+      const dateX = post.date;
+      const month = mapMonth(dateX)
+      const thatDay = mapDate(dateX)
+      const thatYear = mapYear(dateX)
+      console.log(thatDay);
+      
+      
+      projectSection.innerHTML += `<div class="recent-post-widget">
+                  <div class="recent-post-widget-thumbnail">
+                    <a href="#"
+                      ><img
+                        src=${post._embedded["wp:featuredmedia"][0].source_url}
+                        alt=""
+                        width="150"
+                        height="150"
+                    /></a>
+                  </div>
+                  <div class="recent-post-widget-content">
+                    <div class="recent-post-widget-title">
+                      <a href="#">${post.title.rendered}</a>
+                    </div>
+                    <div class="recent-post-widget-info">
+                      <div class="blog-info blog-date greennature-skin-info">
+                        <i class="fa fa-clock-o"></i><a href="#">${thatDay}&nbsp;${month}&nbsp;${thatYear}</a>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>`;
+    });
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+// recent works
+getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
+  const projectSection = document.getElementById("recent-works");
+  if (posts.length > 0) {
+    const filteredPost = posts.splice(0,6)
+   
+    filteredPost.forEach((post) => {
+      projectSection.innerHTML += `<div class="recent-port-widget-thumbnail">
+                  <a href="#"
+                    >
+                    <div>
+                    <img
+                      src=${post._embedded["wp:featuredmedia"][0].source_url}
+                      alt=""
+                      width="150"
+                      height="150"
+                  />
+                  </div>
+                  </a>
+                </div>`;
+    });
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});

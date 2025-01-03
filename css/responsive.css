@@ -115,3 +115,35 @@ element {
   scale:1.1;
   cursor: pointer;
 }
+
+#contact-footer p{
+  margin-bottom: 0;
+}
+
+#address p{
+  margin-bottom: 0;
+}
+
+#recent-works img{
+  height:50px;
+}
+
+#recent-footer img{
+  height:50px;
+}
+
+#recent-news img{
+  height: 70px;
+  width:100%;
+  object-fit: cover;
+  object-position: center;
+  
+}
+
+#team-section img{
+  height: 15rem;
+  width:100%;
+  object-fit: cover;
+  object-position: center;
+  
+}

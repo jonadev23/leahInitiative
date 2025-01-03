@@ -1,9 +1,8 @@
 import { ENV_URL } from "./config.js";
+import { trimString,mapMonth,mapDate,mapYear } from "./trim.js";
 
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL; 
-
-
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
@@ -176,10 +175,10 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
   const projectSection = document.getElementById("project-section");
   if (posts.length > 0) {
     posts.reverse();
+    
+    
     posts.forEach((post) => {
-      const content = post.content.rendered;
-
-      console.log(content)
+          const content = trimString(post.content.rendered)
       projectSection.innerHTML += `<div class="three columns">
                           <div
                             class="greennature-item greennature-portfolio-item greennature-classic-portfolio"
@@ -191,7 +190,7 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
                                 class="portfolio-thumbnail greennature-image"
                                 style = "width:100%;max-height:300px; position:relative"
                               >
-                               <div style="position: absolute; inset: 0; background-color: black;opacity: 0.3;"></div>
+                               <div style="position: absolute; inset: 0; background-color: black;opacity: 0.1;"></div>
                                 <img
                                 id="hover-image"
                                   src=${
@@ -232,7 +231,7 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
                                   <div class="clear"></div>
                                 </div>
                                 <div class="portfolio-excerpt">
-                                  ${post.content.rendered}
+                                  ${content}
                                   <div class="clear"></div>
                                   <a href="#" class="excerpt-read-more"
                                     >Read More</a
@@ -314,7 +313,7 @@ getPostsBySubcategory("homepage", "video").then((posts) => {
 
 //testimonial section
 getPostsBySubcategory("homepage", "testimonial").then((posts) => {
-  console.log(posts);
+  
   const testimonialSection = document.getElementById("testimonial-section");
 
   if (posts.length > 0) {
@@ -427,129 +426,102 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
                   </div>`;
     });
 
-    //   statementSection.innerHTML += `<div class="four columns">
-    //                 <div class="greennature-ux column-service-ux">
-    //                   <div
-    //                     class="greennature-item greennature-column-service-item greennature-type-2"
-    //                     style="margin-bottom: 0px"
-    //                   >
-    //                     <div class="column-service-image">
-    //                       <img
-    //                         src=${post._embedded["wp:featuredmedia"][0].source_url}
-    //                         alt=""
-    //                         width="80"
-    //                         height="80"
-    //                       />
-    //                     </div>
-    //                     <div class="column-service-content-wrapper">
-    //                       <h3 class="column-service-title">${post.title.rendered}</h3>
-    //                       <div
-    //                         class="column-service-content greennature-skin-content"
-    //                       >
-    //                       ${post.content.rendered}
-    //                       </div>
-    //                       <a class="column-service-read-more" href="#"
-    //                         >Learn More</a
-    //                       >
-    //                     </div>
-    //                   </div>
-    //                 </div>
-    //               </div>`;
-    // });
+   
   } else {
     console.log("No posts found in the specified subcategory");
   }
 });
 
 
-// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
-//   try {
-//     // Fetch the parent category by slug
-//     const parentResponse = await fetch(
-//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
-//     );
-//     const parentCategory = await parentResponse.json();
 
-//     if (parentCategory.length > 0) {
-//       const parentId = parentCategory[0].id;
+//recent news section
+getPostsBySubcategory("blogs", "content").then((posts) => {
+  const projectSection = document.getElementById("recent-news");
+  if (posts.length > 0) {
+    
+      const filteredPost = posts.splice(0,3)
+   
+    
+  filteredPost.forEach((post) => {
+      const dateX = post.date;
+      const month = mapMonth(dateX)
+      const thatDay = mapDate(dateX)
+      const thatYear = mapYear(dateX)
+      console.log(thatDay);
+      
+      
+      projectSection.innerHTML += `<div class="twelve columns">
+                          <div class="greennature-item greennature-blog-widget">
+                            <div
+                              class="greennature-ux greennature-blog-widget-ux"
+                            >
+                              <article
+                                id="post-852"
+                                class="post-852 post type-post status-publish format-standard has-post-thumbnail hentry category-fit-row tag-blog tag-life-style"
+                              >
+                                <div class="greennature-standard-style">
+                                  <div class="greennature-blog-thumbnail">
+                                    <a href="#">
+                                      <img
+                                        src=${post._embedded["wp:featuredmedia"][0].source_url}
+                                        alt=""
+                                        width="400"
+                                        height="400"
+                                    /></a>
+                                  </div>
 
-//       // Fetch the specific subcategory by slug and parent ID
-//       const subcategoryResponse = await fetch(
-//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
-//       );
-//       const subcategories = await subcategoryResponse.json();
+                                  <div class="greennature-blog-date-wrapper">
+                                    <div class="greennature-blog-day">${thatDay}</div>
+                                    <div  class="greennature-blog-month">
+                                      ${month}
+                                    </div>
+                                    <div  class="greennature-blog-month">
+                                      ${thatYear}
+                                    </div>
+                                  </div>
 
-//       if (subcategories.length > 0) {
-//         const subcategoryId = subcategories[0].id;
+                                  <header class="post-header">
+                                    <h3 class="greennature-blog-title">
+                                      <a href="#">${post.title.rendered}</a>
+                                    </h3>
 
-//         // Fetch all posts under the subcategory
-//         const postsResponse = await fetch(
-//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
-//         );
-//         const posts = await postsResponse.json();
-
-//         return posts; // Return the posts array
-//       } else {
-//         console.error("Subcategory not found under the specified parent");
-//         return [];
-//       }
-//     } else {
-//       console.error("Parent category not found");
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//   }
-// }
-
-// carousel usage
-
-//put back if fails
-// async function getPostsBySubcategory(parentSlug, subcategorySlug) {
-//   try {
-//     const parentResponse = await fetch(
-//       `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${parentSlug}`
-//     );
-//     const parentCategory = await parentResponse.json();
-
-//     if (parentCategory.length > 0) {
-//       const parentId = parentCategory[0].id;
-
-//       const subcategoryResponse = await fetch(
-//         `http://localhost/climateOrg/wp-json/wp/v2/categories?slug=${subcategorySlug}&parent=${parentId}`
-//       );
-//       const subcategories = await subcategoryResponse.json();
-
-//       if (subcategories.length > 0) {
-//         const subcategoryId = subcategories[0].id;
-
-//         const postsResponse = await fetch(
-//           `http://localhost/climateOrg/wp-json/wp/v2/posts?categories=${subcategoryId}&_embed`
-//         );
-//         const posts = await postsResponse.json();
-
-//         // Fetch tag details for each post
-//         for (const post of posts) {
-//           if (post.tags && post.tags.length > 0) {
-//             const tagIds = post.tags.join(",");
-//             const tagsResponse = await fetch(
-//               `http://localhost/climateOrg/wp-json/wp/v2/tags?include=${tagIds}`
-//             );
-//             const tags = await tagsResponse.json();
-//             post.tagDetails = tags; // Add the tags details to each post
-//           }
-//         }
-
-//         return posts; // Return the posts array with tags
-//       } else {
-//         console.error("Subcategory not found under the specified parent");
-//         return [];
-//       }
-//     } else {
-//       console.error("Parent category not found");
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//   }
-// }
+                                    <div class="greennature-blog-info">
+                                      <div
+                                        class="blog-info blog-comment greennature-skin-info"
+                                      >
+                                        <i class="fa fa-comment-o"></i
+                                        ><a href="##respond"
+                                          >2
+                                          <span class="greennature-tail"
+                                            >Comments</span
+                                          ></a
+                                        >
+                                      </div>
+                                      <div
+                                        class="blog-info blog-author greennature-skin-info"
+                                      >
+                                        <i class="fa fa-pencil"></i
+                                        ><a
+                                          href="#"
+                                          title="Posts by John Maxwell"
+                                          rel="author"
+                                          >John Maxwell</a
+                                        >
+                                      </div>
+                                      <div class="clear"></div>
+                                    </div>
+                                    <div class="clear"></div>
+                                  </header>
+                                  <!-- entry-header -->
+                                  <div class="clear"></div>
+                                </div>
+                              </article>
+                              <!-- #post -->
+                            </div>
+                          </div>
+                        </div>`;
+    });
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});

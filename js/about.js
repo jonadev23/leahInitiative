@@ -58,7 +58,7 @@ getPostsBySubcategory("about", "banner").then((posts) => {
   if (posts.length > 0) {
     const bannerSection = document.getElementById("content-section-1");
     bannerSection.innerHTML += `<div
-                class="greennature-parallax-wrapper greennature-background-image gdlr-show-all greennature-skin-dark-skin"
+                class="greennature-parallax-wrapper  greennature-background-image gdlr-show-all greennature-skin-dark-skin"
                 id="greennature-parallax-wrapper-1"
                 data-bgspeed="0"
                 style="
@@ -67,7 +67,7 @@ getPostsBySubcategory("about", "banner").then((posts) => {
                   padding-bottom: 140px;
                 "
               >
-                <div class="container">
+                <div style="position: relative;z-index:1 ;" class="container">
                   <div class="greennature-title-item">
                     <div
                       class="greennature-item-title-wrapper greennature-item greennature-center greennature-extra-large"
@@ -110,6 +110,7 @@ getPostsBySubcategory("about", "story").then((posts) => {
                   class="greennature-half-bg greennature-bg-solid"
                   style="
                     background-image: url(${posts[0]._embedded["wp:featuredmedia"][0].source_url});
+                    filter: brightness(0.8);
                   "
                 ></div>
                 <div class="container">
@@ -309,7 +310,7 @@ getPostsBySubcategory("about", "action-about").then((posts) => {
                   padding-bottom: 90px;
                 "
               >
-                <div class="container">
+                <div style="position: relative;z-index:1 ;" class="container">
                   <div class="greennature-stunning-item-ux greennature-ux">
                     <div
                       class="greennature-item greennature-stunning-item greennature-stunning-center"
