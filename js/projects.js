@@ -1,14 +1,14 @@
 import { ENV_URL } from "./config.js";
 
 // Define the base URL manually for different environments
-const BASE_URL = ENV_URL; 
+const BASE_URL = ENV_URL;
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-       
+
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -86,7 +86,7 @@ getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
                             </div>
                             <div class="portfolio-classic-content">
                               <h3 class="portfolio-title">
-                                <a href="../portfolio/wind-energy/index.html"
+                                <a href="post.html?id=${post.id}"
                                   >${post.title.rendered}</a
                                 >
                               </h3>

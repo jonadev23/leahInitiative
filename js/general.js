@@ -1,14 +1,14 @@
 import { ENV_URL } from "./config.js";
-import { mapMonth,mapDate,mapYear } from "./trim.js";
+import { mapDate } from "./trim.js";
 // Define the base URL manually for different environments
-const BASE_URL = ENV_URL; 
+const BASE_URL = ENV_URL;
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-       
+
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -79,22 +79,24 @@ getPostsBySubcategory("general-content", "logo").then((posts) => {
                     alt=""
                   />
       `;
-      footerContent.innerHTML = `<div>${posts[0].content.rendered}`
+    footerContent.innerHTML = `<div>${posts[0].content.rendered}`;
   } else {
     console.log("No posts found in the specified subcategory");
   }
 });
 
 //contact-footer section
-getPostsBySubcategory("general-content", "contact-general-content").then((posts) => {
-  const contentWrapper = document.getElementById("contact-footer");
+getPostsBySubcategory("general-content", "contact-general-content").then(
+  (posts) => {
+    const contentWrapper = document.getElementById("contact-footer");
 
-  if (posts.length > 0) {
-    contentWrapper.innerHTML = `<div>${posts[0].content.rendered}</div>`;
-  } else {
-    console.log("No posts found in the specified subcategory");
+    if (posts.length > 0) {
+      contentWrapper.innerHTML = `<div>${posts[0].content.rendered}</div>`;
+    } else {
+      console.log("No posts found in the specified subcategory");
+    }
   }
-});
+);
 
 //address section
 getPostsBySubcategory("general-content", "address").then((posts) => {
@@ -131,8 +133,6 @@ getPostsBySubcategory("general-content", "email").then((posts) => {
   }
 });
 
-
-
 //email section
 getPostsBySubcategory("general-content", "email").then((posts) => {
   const contentWrapper = document.getElementById("email-footer");
@@ -144,24 +144,21 @@ getPostsBySubcategory("general-content", "email").then((posts) => {
   }
 });
 
-
 //recent news section
 getPostsBySubcategory("blogs", "content").then((posts) => {
   const projectSection = document.getElementById("recent-footer");
   if (posts.length > 0) {
-    
-      const filteredPost = posts.splice(0,2)
-   
-    
-  filteredPost.forEach((post) => {
+    const filteredPost = posts.splice(0, 2);
+
+    filteredPost.forEach((post) => {
       const dateX = post.date;
-      const month = mapMonth(dateX)
-      const thatDay = mapDate(dateX)
-      const thatYear = mapYear(dateX)
-      console.log(thatDay);
-      
-      
-      projectSection.innerHTML += `<div class="recent-post-widget">
+
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          projectSection.innerHTML += `<div class="recent-post-widget">
                   <div class="recent-post-widget-thumbnail">
                     <a href="#"
                       ><img
@@ -177,13 +174,18 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
                     </div>
                     <div class="recent-post-widget-info">
                       <div class="blog-info blog-date greennature-skin-info">
-                        <i class="fa fa-clock-o"></i><a href="#">${thatDay}&nbsp;${month}&nbsp;${thatYear}</a>
+                        <i class="fa fa-clock-o"></i><a href="#">${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}</a>
                       </div>
                       <div class="clear"></div>
                     </div>
                   </div>
                   <div class="clear"></div>
                 </div>`;
+        },
+        function (error) {
+          return error;
+        }
+      );
     });
   } else {
     console.log("No posts found in the specified subcategory");
@@ -194,8 +196,8 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
 getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
   const projectSection = document.getElementById("recent-works");
   if (posts.length > 0) {
-    const filteredPost = posts.splice(0,6)
-   
+    const filteredPost = posts.splice(0, 6);
+
     filteredPost.forEach((post) => {
       projectSection.innerHTML += `<div class="recent-port-widget-thumbnail">
                   <a href="#"

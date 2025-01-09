@@ -1,15 +1,15 @@
 import { ENV_URL } from "./config.js";
-import { trimString,mapMonth,mapDate,mapYear } from "./trim.js";
+import { trimString, mapDate } from "./trim.js";
 
 // Define the base URL manually for different environments
-const BASE_URL = ENV_URL; 
+const BASE_URL = ENV_URL;
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-       
+
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -52,8 +52,6 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   } catch (error) {
     console.error("Error fetching posts:", error);
   }
-
-  
 }
 
 getPostsBySubcategory("homepage", "slider").then((posts) => {
@@ -78,8 +76,7 @@ getPostsBySubcategory("homepage", "slider").then((posts) => {
     sliderTwo.style.backgroundSize = "cover";
     sliderTwo.style.backgroundPosition = "center";
     sliderTwoText.innerHTML = posts[1].title.rendered;
-   
-   
+
     sliderTwoText2.innerHTML = posts[1].content.rendered;
     //third
     sliderThree.style.backgroundImage = `url(${posts[2]._embedded["wp:featuredmedia"][0].source_url})`;
@@ -175,10 +172,9 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
   const projectSection = document.getElementById("project-section");
   if (posts.length > 0) {
     posts.reverse();
-    
-    
+
     posts.forEach((post) => {
-          const content = trimString(post.content.rendered)
+      const content = trimString(post.content.rendered);
       projectSection.innerHTML += `<div class="three columns">
                           <div
                             class="greennature-item greennature-portfolio-item greennature-classic-portfolio"
@@ -313,7 +309,6 @@ getPostsBySubcategory("homepage", "video").then((posts) => {
 
 //testimonial section
 getPostsBySubcategory("homepage", "testimonial").then((posts) => {
-  
   const testimonialSection = document.getElementById("testimonial-section");
 
   if (posts.length > 0) {
@@ -385,7 +380,6 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
       (post) => post.title.rendered === "Background"
     );
     statisticsSection.style.backgroundImage = `url(${background[0]._embedded["wp:featuredmedia"][0].source_url})`;
-    
 
     document.getElementById("stunning-item-title").innerHTML =
       background[0].content.rendered;
@@ -425,32 +419,26 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
                     </div>
                   </div>`;
     });
-
-   
   } else {
     console.log("No posts found in the specified subcategory");
   }
 });
 
-
-
 //recent news section
 getPostsBySubcategory("blogs", "content").then((posts) => {
   const projectSection = document.getElementById("recent-news");
   if (posts.length > 0) {
-    
-      const filteredPost = posts.splice(0,3)
-   
-    
-  filteredPost.forEach((post) => {
+    const filteredPost = posts.splice(0, 3);
+
+    filteredPost.forEach((post) => {
       const dateX = post.date;
-      const month = mapMonth(dateX)
-      const thatDay = mapDate(dateX)
-      const thatYear = mapYear(dateX)
-      console.log(thatDay);
-      
-      
-      projectSection.innerHTML += `<div class="twelve columns">
+
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          projectSection.innerHTML += `<div class="twelve columns">
                           <div class="greennature-item greennature-blog-widget">
                             <div
                               class="greennature-ux greennature-blog-widget-ux"
@@ -471,12 +459,12 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
                                   </div>
 
                                   <div class="greennature-blog-date-wrapper">
-                                    <div class="greennature-blog-day">${thatDay}</div>
+                                    <div  class="greennature-blog-day">${dayOfPost}</div>
                                     <div  class="greennature-blog-month">
-                                      ${month}
+                                      ${monthOfPost}
                                     </div>
                                     <div  class="greennature-blog-month">
-                                      ${thatYear}
+                                      ${yearOfPost}
                                     </div>
                                   </div>
 
@@ -520,6 +508,11 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
                             </div>
                           </div>
                         </div>`;
+        },
+        function (error) {
+          return error;
+        }
+      );
     });
   } else {
     console.log("No posts found in the specified subcategory");
