@@ -132,3 +132,15 @@ element {
   object-fit: cover;
   object-position: center;
 }
+
+#imageFit {
+  position: relative;
+  overflow: hidden;
+}
+
+#imageFit img.responsive-image {
+  width: 100%;
+  max-height: 500px; /* Prevents images from being too tall */
+  object-fit: cover;
+  display: block; /* Removes any extra space under the image */
+}
