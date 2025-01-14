@@ -1,14 +1,15 @@
 import { ENV_URL } from "./config.js";
+import { mapDate, trimString } from "./trim.js";
 
 // Define the base URL manually for different environments
-const BASE_URL = ENV_URL; 
+const BASE_URL = ENV_URL;
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-       
+
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -59,8 +60,17 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
 
   if (posts.length > 0) {
     posts.reverse();
+
     posts.forEach((post) => {
-      solutionsWrapper.innerHTML += ` <div class="four columns">
+      console.log(post);
+      const dateX = post.date;
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          const content = trimString(post.content.rendered);
+          solutionsWrapper.innerHTML += ` <div class="four columns">
                               <div
                                 class="greennature-item greennature-blog-grid greennature-skin-box"
                               >
@@ -72,13 +82,12 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
                                     class="post-852 post type-post status-publish format-standard has-post-thumbnail hentry category-fit-row tag-blog tag-life-style"
                                   >
                                     <div class="greennature-standard-style">
-                                      <div class="greennature-blog-thumbnail">
-                                        <a href="post.html?id=${post.id}">
+                                      <div  class="greennature-blog-thumbnail ">
+                                        <a href="single-post.html?id=${post.id}">
                                           <img
                                             src=${post._embedded["wp:featuredmedia"][0].source_url}
-                                            alt=""
-                                            width="400"
-                                            height="300"
+                                            alt="Get Involved"
+                                            
                                         /></a>
                                       </div>
 
@@ -100,7 +109,7 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
                                               <i class="fa fa-clock-o"></i
                                               ><a
                                                 href="../2013/12/11/index.html"
-                                                >11 Dec 2013</a
+                                                >${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}</a
                                               >
                                             </div>
                                             <div
@@ -122,7 +131,7 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
                                         <!-- entry-header -->
 
                                         <div class="greennature-blog-content">
-                                         ${post.content.rendered}
+                                         ${content}
                                           <div class="clear"></div>
                                           <a
                                             href="post.html?id=${post.id}"
@@ -137,6 +146,11 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
                                 </div>
                               </div>
                             </div>`;
+        },
+        function (error) {
+          return error;
+        }
+      );
     });
   } else {
     console.log("No posts found in the specified subcategory");

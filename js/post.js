@@ -30,6 +30,7 @@ fetchPosts().then((post) => {
       const dayOfPost = value.getToday;
       const yearOfPost = value.getThatYear;
       const monthOfPost = value.getMonth;
+
       wrapper.innerHTML = `<div class="twelve columns">
                               <div
                                 class="greennature-item greennature-blog-grid greennature-skin-box"
@@ -46,7 +47,7 @@ fetchPosts().then((post) => {
   <img
     src="${post._embedded["wp:featuredmedia"][0].source_url}"
     alt="Post Thumbnail"
-    class="responsive-image"
+    id="responsive-image"
   />
 </div>
 
