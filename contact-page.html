@@ -38,25 +38,46 @@
         (function() {
             // https://dashboard.emailjs.com/admin/account
             emailjs.init({
-              publicKey: "FOHiZtlGuJIrVuyAn",
+              publicKey: "nz4pzjxI_oa2yO4gc",
             });
         })();
     </script>
     <script type="text/javascript">
-        window.onload = function() {
-            document.getElementById('contact-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                // these IDs from the previous steps
-                emailjs.sendForm('service_ff8r68d', 'contact_form', this)
-                    .then(() => {
-                        console.log('SUCCESS!');
-                    }, (error) => {
-                        console.log('FAILED...', error);
-                    });
-            });
-        }
-    </script>
+      window.onload = function() {
+          // Clear the form on page load
+          const form = document.getElementById('contact-form');
+          if (form) {
+              form.reset();
+          }
+  
+          // Add submit event listener to handle email sending
+          form.addEventListener('submit', function(event) {
+              event.preventDefault(); // Prevent default form submission
+              
+              // Sending form data using EmailJS
+              emailjs.sendForm('contact_service', 'contact_form', this)
+                  .then(() => {
+                      alert('SUCCESS!');
+                      // Clear the form after successful submission
+                      form.reset();
+                  }, (error) => {
+                      alert('FAILED...', error);
+                  });
+          });
+      };
+  </script>
+  
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7GPGS5V91Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7GPGS5V91Z');
+</script>
 
 <body data-rsssl=1 class="home page-template-default page page-id-5680 _masterslider _msp_version_3.2.7 woocommerce-no-js">
     <div class="body-wrapper  float-menu" data-home="https://demo.goodlayers.com/greennature/">
@@ -180,7 +201,7 @@
                 </li>
                 <li class="menu-item menu-item-has-children">
                   <a href="blogs.html">Blog</a>
-                 
+                </li>
             </div>
           </div>
   
@@ -313,8 +334,10 @@
                                     <h5 class="greennature-heading-shortcode " style="font-weight: bold;">Please fulfil the form below. </h5>
                                     <p> <span class="clear"></span><span class="greennature-space" style="margin-top: 25px; display: block;"></span>
                                         <div role="form" class="wpcf7" id="wpcf7-f4-o1" lang="en-US" dir="ltr">
-                                            <form id="contact-form" class="quform" >
-
+                                            <form id="contact-form"  >
+                                              <input type="hidden" name="contact_number" value="697483">
+                                              <input type="hidden" name="purpose" value="ContactUsForm">
+                                              <input type="hidden" name="to_name" value="LEAH INITIATIVE">
                                                 <div class="quform-elements">
                                                     <div class="quform-element">
                                                         <p>
@@ -328,7 +351,7 @@
                                                         <p>
                                                             <br>
                                                             <span class="wpcf7-form-control-wrap your-email">
-                                                                <input id="email" type="text" name="user_email" size="40" class="input1" aria-required="true" aria-invalid="false" placeholder="Email*">
+                                                                <input id="email" type="email" name="user_email" size="40" class="input1" aria-required="true" aria-invalid="false" placeholder="Email*">
                                                             </span> 
                                                         </p>
                                                     </div>

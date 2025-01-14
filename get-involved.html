@@ -98,7 +98,51 @@
       media="all"
     />
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- script for EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+              publicKey: "nz4pzjxI_oa2yO4gc",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+      window.onload = function() {
+          // Clear the form on page load
+          const form = document.getElementById('contact-form-1');
+          if (form) {
+              form.reset();
+          }
+  
+          // Add submit event listener to handle email sending
+          form.addEventListener('submit', function(event) {
+              event.preventDefault(); // Prevent default form submission
+              
+              // Sending form data using EmailJS
+              emailjs.sendForm('contact_service', 'contact_form', this)
+                  .then(() => {
+                      alert('SUCCESS!');
+                      // Clear the form after successful submission
+                      form.reset();
+                  }, (error) => {
+                      alert('FAILED...', error);
+                  });
+          });
+      };
+  </script>
   </head>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7GPGS5V91Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7GPGS5V91Z');
+</script>
 
   <body
     data-rsssl="1"
@@ -332,7 +376,6 @@
         <div class="greennature-page-title-overlay"></div>
         <div class="greennature-page-title-container container">
           <h1 class="greennature-page-title">Get Involved</h1>
-          <span class="greennature-page-caption">Caption placed here</span>
         </div>
       </div>
       <!-- is search -->
@@ -408,7 +451,7 @@
                     <h3
                       class="greennature-item-title greennature-skin-title greennature-skin-border"
                     >
-                      Your Voice To The President
+                      Your Voice To The Team
                     </h3>
                     <div
                       class="greennature-item-title-caption greennature-skin-info"
@@ -431,46 +474,33 @@
               >
                 <div class="screen-reader-response"></div>
                 <form
-                  action="#"
-                  method="post"
-                  class="wpcf7-form"
-                  novalidate="novalidate"
+                id="contact-form-1"
                 >
+                <input type="hidden" name="contact_number" value="106372">
+                                              <input type="hidden" name="purpose" value="GetInvolvedForm">
+                                              <input type="hidden" name="to_name" value="LEAH INITIATIVE">
                   <div class="wpcf7-contact-half-left">
-                    <p>
-                      <span class="wpcf7-form-control-wrap first-name"
-                        ><input
-                          type="text"
-                          name="first-name"
-                          value=""
-                          size="40"
-                          class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
-                          aria-required="true"
-                          aria-invalid="false"
-                          placeholder="*Name"
-                      /></span>
-                    </p>
+                   
                     <p>
                       <span class="wpcf7-form-control-wrap last-name"
                         ><input
                           type="text"
-                          name="last-name"
-                          value=""
+                          name="user_name"
                           size="40"
-                          class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                          class="input1"
                           aria-required="true"
                           aria-invalid="false"
-                          placeholder="*Last Name"
+                          placeholder="*Full Names"
                       /></span>
                     </p>
                     <p>
                       <span class="wpcf7-form-control-wrap your-email"
                         ><input
                           type="email"
-                          name="your-email"
-                          value=""
+                          id="email"
+                          name="user_email"
                           size="40"
-                          class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
+                          class="input1"
                           aria-required="true"
                           aria-invalid="false"
                           placeholder="*Email"
@@ -479,10 +509,10 @@
                     <p>
                       <span class="wpcf7-form-control-wrap address">
                         <textarea
-                          name="address"
+                          name="user_address"
                           cols="40"
                           rows="10"
-                          class="wpcf7-form-control wpcf7-textarea"
+                          class="input1"
                           aria-invalid="false"
                           placeholder="*Address"
                         ></textarea>
@@ -493,24 +523,12 @@
                     <p>
                       <span class="wpcf7-form-control-wrap your-message">
                         <textarea
-                          name="your-message"
+                          name="message"
                           cols="40"
                           rows="10"
                           class="wpcf7-form-control wpcf7-textarea wpcf7-full"
                           aria-invalid="false"
-                        >
-The world needs US leadership on climate change 
-
-                                 Dear President Obama, 
-                                 I believe US leadership is the key to a strong global solution to this great threat to people and nature.
-                                 Climate change is one of the greatest challenges facing the United States and the world today. And I know that the only way to protect human society and life on our planet from its worst impacts will be strong action by all countries--but particularly, strong and ambitious leadership by the United States, both at home and abroad. 
-
-                                 Thank you for your ongoing efforts to advance climate action in the US. What is needed now is a strong, visionary target to cut carbon pollution all across America and support vulnerable communities around the world who are in danger from growing extreme storms, worsening droughts, and sea level rise. 
-
-                                 As you said, the United States has a special responsibility to lead the global response to this international crisis. Showing the world that the US has a strong vision to move to 100% clean energy will inspire other countries to act and finally bring the world together to address this crisis. 
-
-                                 The world needs America&#039;s leadership right now. I support this Administration moving as quickly and aggressively as possible to reduce US carbon emissions and contribute its fair share to helping the world face down this threat.</textarea
-                        >
+                        ></textarea>
                       </span>
                     </p>
                   </div>
@@ -692,7 +710,7 @@ The world needs US leadership on climate change
               ></a>
             </div>
             <div class="copyright-right">
-              Copyright 2016 GoodLayers, All Right Reserved
+              Copyright 2025 LeahInitiative, All Right Reserved
             </div>
             <div class="clear"></div>
           </div>
