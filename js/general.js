@@ -1,5 +1,5 @@
 import { ENV_URL } from "./config.js";
-import { mapDate } from "./trim.js";
+import { mapDate, cleanString } from "./trim.js";
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL;
 
@@ -52,6 +52,17 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
     console.error("Error fetching posts:", error);
   }
 }
+
+//favicon section
+getPostsBySubcategory("general-content", "logo").then((posts) => {
+  const contentWrapper = document.getElementById("favicon");
+
+  if (posts.length > 0) {
+    contentWrapper.href = `${posts[0]._embedded["wp:featuredmedia"][0].source_url}`;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
 //logo-navbar section
 getPostsBySubcategory("general-content", "logo").then((posts) => {
   const contentWrapper = document.getElementById("logo");
@@ -139,6 +150,71 @@ getPostsBySubcategory("general-content", "email").then((posts) => {
 
   if (posts.length > 0) {
     contentWrapper.innerHTML = `<span>${posts[0].content.rendered}</span>`;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//linked-in section
+getPostsBySubcategory("general-content", "linkedin").then((posts) => {
+  const contentWrapper = document.getElementById("linkedIn");
+  const contentWrapperF = document.getElementById("linkedInFooter");
+  if (posts.length > 0) {
+    const content = cleanString(posts[0].content.rendered);
+    contentWrapper.href = content;
+    contentWrapperF.href = content;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//facebook section
+getPostsBySubcategory("general-content", "facebook").then((posts) => {
+  const contentWrapper = document.getElementById("faceBook");
+  const contentWrapperF = document.getElementById("facebookFooter");
+  if (posts.length > 0) {
+    const content = cleanString(posts[0].content.rendered);
+    contentWrapper.href = content;
+    contentWrapperF.href = content;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//twitter section
+getPostsBySubcategory("general-content", "twitter").then((posts) => {
+  const contentWrapper = document.getElementById("twitter");
+  const contentWrapperF = document.getElementById("twitterFooter");
+  if (posts.length > 0) {
+    const content = cleanString(posts[0].content.rendered);
+    contentWrapper.href = content;
+    contentWrapperF.href = content;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//youtube section
+getPostsBySubcategory("general-content", "youtube").then((posts) => {
+  const contentWrapper = document.getElementById("youtube");
+  const contentWrapperF = document.getElementById("youtubeFooter");
+  if (posts.length > 0) {
+    const content = cleanString(posts[0].content.rendered);
+    contentWrapper.href = content;
+    contentWrapperF.href = content;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+//instagram section
+getPostsBySubcategory("general-content", "instagram").then((posts) => {
+  const contentWrapper = document.getElementById("instagram");
+  const contentWrapperF = document.getElementById("instagramFooter");
+  if (posts.length > 0) {
+    const content = cleanString(posts[0].content.rendered);
+    contentWrapper.href = content;
+    contentWrapperF.href = content;
   } else {
     console.log("No posts found in the specified subcategory");
   }

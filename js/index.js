@@ -207,7 +207,9 @@ getPostsBySubcategory("homepage", "projects").then((posts) => {
                               </div>
                               <div class="portfolio-classic-content">
                                 <h3 class="portfolio-title">
-                                  <a href="#">${post.title.rendered}</a>
+                                  <a href="single-post.html?id=${post.id}">${
+        post.title.rendered
+      }</a>
                                 </h3>
                                 <div class="greennature-portfolio-info">
                                   <div class="portfolio-info portfolio-tag">

@@ -11,7 +11,7 @@
 
     <title>Contact Us</title>
 
-
+    <link id="favicon"  rel="icon" type="image/x-icon" href="#">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato%3A100%2C100italic%2C300%2C300italic%2Cregular%2Citalic%2C700%2C700italic%2C900%2C900italic&amp;subset=latin&amp;' type='text/css' media='all' />
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto+Sans%3Aregular%2Citalic%2C700%2C700italic&amp;subset=greek%2Ccyrillic-ext%2Ccyrillic%2Clatin%2Clatin-ext%2Cvietnamese%2Cgreek-ext&amp;' type='text/css' media='all' />
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather%3A300%2C300italic%2Cregular%2Citalic%2C700%2C700italic%2C900%2C900italic&amp;subset=latin%2Clatin-ext&amp;' type='text/css' media='all' />
@@ -89,14 +89,13 @@
         <div class="top-navigation-container container">
           <div class="top-navigation-left">
             <div id="contactDetails"  class="top-navigation-left-text">
-              Phone : <span id="contact"></span>&nbsp;&nbsp;&nbsp; Email :
-              <span id="email"></span>
+              Phone&#58;<span id="contact"></span>&nbsp;&nbsp;&nbsp; Email&#58;<span id="email"></span>
             </div>
           </div>
           <div class="top-navigation-right">
             <div class="top-social-wrapper">
               <div class="social-icon">
-                <a href="#" target="_blank">
+                <a id="faceBook" href="#" target="_blank">
                   <i class="fa fa-facebook"></i
                 ></a>
               </div>
@@ -104,23 +103,19 @@
                 <a href="#" target="_blank"> <i class="fa fa-flickr"></i></a>
               </div>
               <div class="social-icon">
-                <a href="#" target="_blank">
+                <a id="linkedIn" href="#" target="_blank">
                   <i class="fa fa-linkedin"></i
                 ></a>
               </div>
+             
               <div class="social-icon">
-                <a href="#" target="_blank">
-                  <i class="fa fa-pinterest-p"></i
-                ></a>
+                <a id="instagram" href="#" target="_blank"> <i class="fa fa-instagram"></i></a>
               </div>
               <div class="social-icon">
-                <a href="#" target="_blank"> <i class="fa fa-tumblr"></i></a>
+                <a id="twitter" href="#" target="_blank"> <i class="fa fa-twitter"></i></a>
               </div>
               <div class="social-icon">
-                <a href="#" target="_blank"> <i class="fa fa-twitter"></i></a>
-              </div>
-              <div class="social-icon">
-                <a href="#" target="_blank"> <i class="fa fa-vimeo"></i></a>
+                <a id="youtube" href="#" target="_blank"> <i class="fa fa-youtube"></i></a>
               </div>
               <div class="clear"></div>
             </div>
@@ -151,7 +146,7 @@
                 <li
                   class="menu-item menu-item-home current-menu-item page_item page-item-5680 current_page_item"
                 >
-                  <a href="index.html" aria-current="page">Home</a>
+                  <a href="index.html" >Home</a>
                 </li>
                 <li class="menu-item menu-item-has-children menu-item-15">
                   <a href="#">Pages</a>
@@ -175,7 +170,7 @@
                     
                     <li class="menu-item"><a href="qa.html">Q&#038;A</a></li> -->
                     <li class="menu-item">
-                      <a href="contact-page.html">Contact Page</a>
+                      <a href="contact-page.html" aria-current="page">Contact Page</a>
                     </li>
                     <!-- <li class="menu-item">
                       <a href="contact-page-2.html">Contact Page 2</a>
@@ -201,7 +196,7 @@
                 </li>
                 <li class="menu-item menu-item-has-children">
                   <a href="blogs.html">Blog</a>
-                </li>
+                 
             </div>
           </div>
   
@@ -572,7 +567,7 @@ style="vertical-align: middle; color: #fff; font-size: 16px"
   <div class="copyright-wrapper">
     <div class="copyright-container container">
       <div class="copyright-left">
-        <a href="http://facebook.com/goodlayers"
+        <a id="facebookFooter" href="#"
           ><i
             class="greennature-icon fa fa-facebook"
             style="
@@ -582,7 +577,7 @@ style="vertical-align: middle; color: #fff; font-size: 16px"
             "
           ></i
         ></a>
-        <a href="http://twitter.com/goodlayers"
+        <a id="twitterFooter" href="#"
           ><i
             class="greennature-icon fa fa-twitter"
             style="
@@ -592,9 +587,9 @@ style="vertical-align: middle; color: #fff; font-size: 16px"
             "
           ></i
         ></a>
-        <a href="#"
+        <a id="youtubeFooter" href="#"
           ><i
-            class="greennature-icon fa fa-dribbble"
+            class="greennature-icon fa fa-youtube"
             style="
               vertical-align: middle;
               color: #bbbbbb;
@@ -602,27 +597,7 @@ style="vertical-align: middle; color: #fff; font-size: 16px"
             "
           ></i
         ></a>
-        <a href="#"
-          ><i
-            class="greennature-icon fa fa-pinterest"
-            style="
-              vertical-align: middle;
-              color: #bbbbbb;
-              font-size: 20px;
-            "
-          ></i
-        ></a>
-        <a href="#"
-          ><i
-            class="greennature-icon fa fa-google-plus"
-            style="
-              vertical-align: middle;
-              color: #bbbbbb;
-              font-size: 20px;
-            "
-          ></i
-        ></a>
-        <a href="#"
+        <a id="instagramFooter" href="#"
           ><i
             class="greennature-icon fa fa-instagram"
             style="
@@ -632,9 +607,20 @@ style="vertical-align: middle; color: #fff; font-size: 16px"
             "
           ></i
         ></a>
+        <a id="linkedInFooter" href="#"
+          ><i
+            class="greennature-icon fa fa-linkedin"
+            style="
+              vertical-align: middle;
+              color: #bbbbbb;
+              font-size: 20px;
+            "
+          ></i
+        ></a>
+        
       </div>
       <div class="copyright-right">
-        Copyright 2016 GoodLayers, All Right Reserved
+        Copyright 2025 LeahInitiative, All Right Reserved
       </div>
       <div class="clear"></div>
     </div>

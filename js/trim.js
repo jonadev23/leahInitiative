@@ -8,6 +8,10 @@ export function trimString(text) {
   return result;
 }
 
+export function cleanString(text) {
+  return text.replace(/<\/?p>/g, "");
+}
+
 //console.log(trimString("<p>Remove the paragraph</p>"));
 
 //  put async later
