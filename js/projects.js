@@ -1,4 +1,5 @@
 import { ENV_URL } from "./config.js";
+import { trimString } from "./trim.js";
 
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL;
@@ -59,6 +60,7 @@ getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
   if (posts.length > 0) {
     posts.reverse();
     posts.forEach((post) => {
+      const content = trimString(post.content.rendered);
       projectSection.innerHTML += `<div class="four columns">
                         <div
                           class="greennature-item greennature-portfolio-item greennature-classic-portfolio"
@@ -108,7 +110,7 @@ getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
                                 <div class="clear"></div>
                               </div>
                               <div class="portfolio-excerpt">
-                              ${post.content.rendered}
+                              ${content}
                                 <div class="clear"></div>
                                 <a
                                   href="../portfolio/wind-energy/index.html"

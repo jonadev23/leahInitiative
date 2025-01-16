@@ -168,7 +168,7 @@ getPostsBySubcategory("homepage", "action").then((posts) => {
 });
 
 //project section
-getPostsBySubcategory("homepage", "projects").then((posts) => {
+getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
   const projectSection = document.getElementById("project-section");
   if (posts.length > 0) {
     posts.reverse();
