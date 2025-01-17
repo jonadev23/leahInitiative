@@ -1,5 +1,5 @@
 import { ENV_URL } from "./config.js";
-import { trimString } from "./trim.js";
+import { trimString, mapDate } from "./trim.js";
 
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL;
@@ -60,8 +60,15 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
 
   if (posts.length > 0) {
     posts.forEach((post) => {
-      const content = trimString(post.content.rendered);
-      contentWrapper.innerHTML += `<div class="six columns">
+      const dateX = post.date;
+
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          const content = trimString(post.content.rendered);
+          contentWrapper.innerHTML += `<div class="six columns">
       <div
         class="greennature-item greennature-blog-grid greennature-skin-box"
       >
@@ -101,10 +108,7 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
                       class="blog-info blog-date greennature-skin-info"
                     >
                       <i class="fa fa-clock-o"></i
-                      ><a
-                        href="../2013/12/09/index.html"
-                        >09 Dec 2013</a
-                      >
+                      >${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}
                     </div>
                     <div
                       class="blog-info blog-comment greennature-skin-info"
@@ -141,6 +145,11 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
       </div>
     </div>
     `;
+        },
+        function (error) {
+          return error;
+        }
+      );
     });
   } else {
     console.log("No posts found in the specified subcategory");
