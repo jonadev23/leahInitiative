@@ -59,7 +59,6 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
   const contentWrapper = document.getElementById("content-events");
 
   if (posts.length > 0) {
-    posts.reverse();
     posts.forEach((post) => {
       const content = trimString(post.content.rendered);
       contentWrapper.innerHTML += `<div class="six columns">
