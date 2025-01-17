@@ -1,14 +1,15 @@
 import { ENV_URL } from "./config.js";
+import { trimString } from "./trim.js";
 
 // Define the base URL manually for different environments
-const BASE_URL = ENV_URL; 
+const BASE_URL = ENV_URL;
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-       
+
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -60,6 +61,7 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
   if (posts.length > 0) {
     posts.reverse();
     posts.forEach((post) => {
+      const content = trimString(post.content.rendered);
       contentWrapper.innerHTML += `<div class="six columns">
       <div
         class="greennature-item greennature-blog-grid greennature-skin-box"
@@ -124,7 +126,7 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
                 <!-- entry-header -->
 
                 <div class="greennature-blog-content">
-                  ${post.content.rendered}
+                  ${content}
                   <div class="clear"></div>
                   <a
                     href="../2013/12/09/magna-pars-studiorum/index.html"
