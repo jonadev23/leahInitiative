@@ -1,14 +1,15 @@
 import { ENV_URL } from "./config.js";
+import { trimStringLong } from "./trim.js";
 
 // Define the base URL manually for different environments
-const BASE_URL = ENV_URL; 
+const BASE_URL = ENV_URL;
 
 async function getPostsBySubcategory(parentSlug, subcategorySlug) {
   try {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-       
+
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -101,6 +102,7 @@ getPostsBySubcategory("about", "banner").then((posts) => {
 //   story section
 getPostsBySubcategory("about", "story").then((posts) => {
   if (posts.length > 0) {
+    const content = trimStringLong(posts[0].content.rendered);
     const bannerSection = document.getElementById("content-section-2");
     bannerSection.innerHTML += ` <div
                 class="greennature-color-wrapper gdlr-show-all no-skin greennature-half-bg-wrapper"
@@ -132,7 +134,7 @@ getPostsBySubcategory("about", "story").then((posts) => {
                       </div>
                       <div class="about-us-content-wrapper">
                         <div class="about-us-content greennature-skin-content">
-                          ${posts[0].content.rendered}
+                          ${content}
                         </div>
                         <a
                           class="about-us-read-more greennature-button"
@@ -155,7 +157,7 @@ getPostsBySubcategory("about", "story").then((posts) => {
 getPostsBySubcategory("about", "objectives").then((posts) => {
   if (posts.length > 0) {
     const objectivesSection = document.getElementById("objectives-section");
-    posts.reverse()
+    posts.reverse();
     posts.forEach((post) => {
       objectivesSection.innerHTML += `<div class="four columns">
                     <div class="greennature-ux column-service-ux">
