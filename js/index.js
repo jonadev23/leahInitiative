@@ -427,7 +427,7 @@ getPostsBySubcategory("homepage", "statistics").then((posts) => {
 });
 
 //recent news section
-getPostsBySubcategory("blogs", "content").then((posts) => {
+getPostsBySubcategory("events", "content-events").then((posts) => {
   const projectSection = document.getElementById("recent-news");
   if (posts.length > 0) {
     const filteredPost = posts.splice(0, 3);
