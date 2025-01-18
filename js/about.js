@@ -102,7 +102,7 @@ getPostsBySubcategory("about", "banner").then((posts) => {
 //   story section
 getPostsBySubcategory("about", "story").then((posts) => {
   if (posts.length > 0) {
-    const content = trimStringLong(posts[0].content.rendered);
+    const content = trimStringLong(posts[0].content.rendered, 1000);
     const bannerSection = document.getElementById("content-section-2");
     bannerSection.innerHTML += ` <div
                 class="greennature-color-wrapper gdlr-show-all no-skin greennature-half-bg-wrapper"
@@ -157,6 +157,7 @@ getPostsBySubcategory("about", "story").then((posts) => {
 getPostsBySubcategory("about", "objectives").then((posts) => {
   if (posts.length > 0) {
     const objectivesSection = document.getElementById("objectives-section");
+    const content = trimStringLong(posts[0].content.rendered, 150);
     posts.reverse();
     posts.forEach((post) => {
       objectivesSection.innerHTML += `<div class="four columns">
@@ -184,7 +185,7 @@ getPostsBySubcategory("about", "objectives").then((posts) => {
                           <div
                             class="column-service-content greennature-skin-content"
                           >
-                            ${post.content.rendered}
+                            ${content}
                           </div>
                         </div>
                       </div>

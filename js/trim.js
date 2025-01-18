@@ -8,13 +8,13 @@ export function trimString(text) {
   return result;
 }
 
-export function trimStringLong(text) {
+
+
+export function trimStringLong(text,number) {
   const replacedStr = text.replace(/\//g, "");
   const cleanedStr = replacedStr.replace(/<p>/g, "");
   const replaced = cleanedStr.replace(cleanedStr.substring(100), "...");
-  const result = cleanedStr.length > 1000 ? replaced : cleanedStr;
-  //console.log(result);
-
+  const result = cleanedStr.length > number ? replaced : cleanedStr;
   return result;
 }
 
