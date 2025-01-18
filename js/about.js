@@ -329,13 +329,13 @@ getPostsBySubcategory("about", "action-about").then((posts) => {
                         </p>
                       </div>
                       <a
-                        class="stunning-item-button greennature-button large greennature-lb-payment"
-                        href="#"
+                        class="stunning-item-button greennature-button large"
+                         href="https://donate.stripe.com/test_6oEdUyb9B5IDdCo4gg" 
                         style="background-color: #fec428; color: #ffffff"
                         >Donate Now!</a
                       ><a
                         class="stunning-item-button greennature-button large"
-                        href="#"
+                        href="get-involved.html"
                         >Act Now!</a
                       >
                     </div>
