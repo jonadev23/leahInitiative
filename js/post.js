@@ -12,7 +12,6 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
     const parentResponse = await fetch(
       `${BASE_URL}/wp-json/wp/v2/categories?slug=${parentSlug}`
     );
-
     const parentCategory = await parentResponse.json();
 
     if (parentCategory.length > 0) {
@@ -61,29 +60,29 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
 const fetchPosts = async () => {
   try {
     const result = await fetch(
-      `http://localhost/climateOrg/wp-json/wp/v2/posts/${postId}?_embed`
+      `${BASE_URL}/wp-json/wp/v2/posts/${postId}?_embed`
     );
     if (!result.ok) {
-      console.log("Error while fetching");
-    } else {
-      return result.json();
+      throw new Error(`HTTP error! status: ${result.status}`);
     }
+    return await result.json();
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching post:", error);
   }
 };
 
 fetchPosts().then((post) => {
-  const wrapper = document.getElementById("singlePostContent");
-  const dateX = post.date;
+  if (post) {
+    const wrapper = document.getElementById("singlePostContent");
+    const dateX = post.date;
 
-  mapDate(dateX).then(
-    function (value) {
-      const dayOfPost = value.getToday;
-      const yearOfPost = value.getThatYear;
-      const monthOfPost = value.getMonth;
+    mapDate(dateX).then(
+      function (value) {
+        const dayOfPost = value.getToday;
+        const yearOfPost = value.getThatYear;
+        const monthOfPost = value.getMonth;
 
-      wrapper.innerHTML = `<div class="twelve columns">
+        wrapper.innerHTML = `<div class="twelve columns">
                               <div
                                 class="greennature-item greennature-blog-grid greennature-skin-box"
                               >
@@ -113,7 +112,7 @@ fetchPosts().then((post) => {
                                             >
                                               <i class="fa fa-clock-o"></i
                                               ><a
-                                                
+                                                 
                                                 >${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}</a
                                               >
                                             </div>
@@ -151,28 +150,19 @@ fetchPosts().then((post) => {
                                 </div>
                               </div>
                             </div>`;
-    },
-    function (error) {
-      return error;
-    }
-  );
+      },
+      function (error) {
+        console.error("Error formatting date:", error);
+      }
+    );
+  }
 });
-// fetch(`http://localhost/climateOrg/wp-json/wp/v2/posts/${postId}?_embed`)
-//   .then((response) => response.json())
-//   .then((post) => {
-//     console.log(post);
-//     postDetails.innerHTML = `
-//       <h1>${post.title.rendered}</h1>
-//       <img src="${post._embedded["wp:featuredmedia"][0].source_url}" alt="" />
-//       <div>${post.content.rendered}</div>`;
-//   })
-//   .catch((error) => console.error("Error fetching post details:", error));
 
-// recent works
+// Recent works section
 getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
   const projectSection = document.getElementById("recent");
   if (posts.length > 0) {
-    const filteredPost = posts.splice(0, 2);
+    const filteredPost = posts.slice(0, 2);
 
     filteredPost.forEach((post) => {
       const dateX = post.date;
@@ -186,7 +176,7 @@ getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
                         <div class="recent-post-widget-thumbnail">
                           <a href="../portfolio/wind-energy/index.html"
                             ><img
-                              src=${post._embedded["wp:featuredmedia"][0].source_url}
+                              src="${post._embedded["wp:featuredmedia"][0].source_url}"
                               alt=""
                               width="150"
                               height="150"
@@ -211,7 +201,7 @@ getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
                       </div>`;
         },
         function (error) {
-          return error;
+          console.error("Error formatting date:", error);
         }
       );
     });

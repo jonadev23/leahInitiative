@@ -1,5 +1,5 @@
 import { ENV_URL } from "./config.js";
-
+import { mapDate } from "./trim.js";
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL; 
 
@@ -58,8 +58,16 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
   const contentWrapper = document.getElementById("content-blogs");
 
   if (posts.length > 0) {
+    
     posts.reverse();
     posts.forEach((post) => {
+      const dateX = post.date;
+      
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
       contentWrapper.innerHTML += `<div class="twelve columns">
                               <div
                                 class="greennature-item greennature-blog-grid greennature-skin-box"
@@ -72,7 +80,7 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
                                     class="post-852 post type-post status-publish format-standard has-post-thumbnail hentry category-fit-row tag-blog tag-life-style"
                                   >
                                     <div class="greennature-standard-style">
-                                      <div class="greennature-blog-thumbnail">
+                                      <div id="blog" class="greennature-blog-thumbnail">
                                         <a
                                           href="../2013/12/11/donec-luctus-imperdiet/index.html"
                                         >
@@ -102,7 +110,7 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
                                               <i class="fa fa-clock-o"></i
                                               ><a
                                                 href="../2013/12/11/index.html"
-                                                >11 Dec 2013</a
+                                                >${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}</a
                                               >
                                             </div>
                                             <div
@@ -140,7 +148,12 @@ getPostsBySubcategory("blogs", "content").then((posts) => {
                               </div>
                             </div>
                             <div class="clear"></div>`;
-    });
+                          },
+                          function (error) {
+                            return error;
+                          }
+                        );
+                      });
   } else {
     console.log("No posts found in the specified subcategory");
   }
