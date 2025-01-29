@@ -358,18 +358,33 @@
                             class="greennature-isotope"
                             data-type="blog"
                             data-layout="fitRows"
-                            id="content-blogs"
+                            id="data-container"
                           ></div>
                         </div>
-                        <div class="greennature-pagination">
-                          <span aria-current="page" class="page-numbers current"
-                            >1</span
+                        <div class="greennature-pagination" id="pagination" role="navigation">
+                          <a id="prev" class="prev page-numbers" href="#">&lsaquo; Prev</a>
+                          
+                          <span id="page-links"></span> <!-- Page numbers dynamically inserted here -->
+                          
+                          <a id="next" class="next page-numbers" href="#">Next &rsaquo;</a>
+                          
+                         
+                      </div>
+                      
+                      
+                        <!-- <div class="greennature-pagination" id="pagination">
+                          <a id="prev" class="next page-numbers" href="#"
+                          >&lsaquo; Prev</a
+                        >
+                          <a aria-current="page" href="#" data-page="1" class="page-numbers current page-link "
+                            >1</a
                           >
-                          <a class="page-numbers" href="page/2/index.html">2</a>
-                          <a class="next page-numbers" href="page/2/index.html"
+                          <a class="page-numbers page-link" data-page="2" href="#">2</a>
+                          <a id="next" class="next page-numbers" href="#"
                             >Next &rsaquo;</a
                           >
-                        </div>
+                          <p id="page-numbers"> </p> 
+                        </div> -->
                       </div>
                       <div class="clear"></div>
                     </div>
@@ -411,13 +426,10 @@
                     id="text-2"
                     class="widget widget_text greennature-item greennature-widget"
                   >
-                    <h3 class="greennature-widget-title">Text Widget</h3>
+                    <h3 class="greennature-widget-title">Did you Know !?</h3>
                     <div class="clear"></div>
                     <div class="textwidget">
-                      Sed posuere consectetur est at lobortis. Donec id elit non
-                      mi porta gravida at eget metus. Lorem ipsum dolor sit
-                      amet, consectetur adipiscing elit. Nullam id dolor id nibh
-                      ultricies vehicula ut id elit.
+                      That cows are climate influencers? 🐄 Methane, a greenhouse gas, is 25 times more effective than carbon dioxide at trapping heat in the atmosphere, and cows produce a significant amount of it through their digestive processes. So, adopting a more plant-based diet can actually help reduce methane emissions and combat climate change. 🌱🍽️
                     </div>
                   </div>
                   <div
@@ -426,99 +438,8 @@
                   >
                     <h3 class="greennature-widget-title">Recent Works</h3>
                     <div class="clear"></div>
-                    <div class="greennature-recent-port-widget">
-                      <div class="recent-post-widget">
-                        <div class="recent-post-widget-thumbnail">
-                          <a href="../portfolio/wind-energy/index.html"
-                            ><img
-                              src="upload/shutterstock_161515241-150x150.jpg"
-                              alt=""
-                              width="150"
-                              height="150"
-                          /></a>
-                        </div>
-                        <div class="recent-post-widget-content">
-                          <div class="recent-post-widget-title">
-                            <a href="../portfolio/wind-energy/index.html"
-                              >Wind Energy</a
-                            >
-                          </div>
-                          <div class="recent-post-widget-info">
-                            <div
-                              class="blog-info blog-date greennature-skin-info"
-                            >
-                              <i class="fa fa-clock-o"></i
-                              ><a href="../2013/12/04/index.html"
-                                >04 Dec 2013</a
-                              >
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div class="clear"></div>
-                      </div>
-                      <div class="recent-post-widget">
-                        <div class="recent-post-widget-thumbnail">
-                          <a href="../portfolio/elephant-sanctuary/index.html"
-                            ><img
-                              src="upload/shutterstock_133689230-150x150.jpg"
-                              alt=""
-                              width="150"
-                              height="150"
-                          /></a>
-                        </div>
-                        <div class="recent-post-widget-content">
-                          <div class="recent-post-widget-title">
-                            <a href="../portfolio/elephant-sanctuary/index.html"
-                              >Elephant Sanctuary</a
-                            >
-                          </div>
-                          <div class="recent-post-widget-info">
-                            <div
-                              class="blog-info blog-date greennature-skin-info"
-                            >
-                              <i class="fa fa-clock-o"></i
-                              ><a href="../2013/12/04/index.html"
-                                >04 Dec 2013</a
-                              >
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div class="clear"></div>
-                      </div>
-                      <div class="recent-post-widget">
-                        <div class="recent-post-widget-thumbnail">
-                          <a
-                            href="../portfolio/conservation-volunteering/index.html"
-                            ><img
-                              src="upload/shutterstock_53600221-150x150.jpg"
-                              alt=""
-                              width="150"
-                              height="150"
-                          /></a>
-                        </div>
-                        <div class="recent-post-widget-content">
-                          <div class="recent-post-widget-title">
-                            <a
-                              href="../portfolio/conservation-volunteering/index.html"
-                              >Conservation Volunteer</a
-                            >
-                          </div>
-                          <div class="recent-post-widget-info">
-                            <div
-                              class="blog-info blog-date greennature-skin-info"
-                            >
-                              <i class="fa fa-clock-o"></i
-                              ><a href="../2013/12/04/index.html"
-                                >04 Dec 2013</a
-                              >
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div class="clear"></div>
-                      </div>
+                    <div id="recent" class="greennature-recent-port-widget">
+                    
                       <div class="clear"></div>
                     </div>
                   </div>
@@ -848,158 +769,14 @@
       </footer>
 
 
-      <div
-        class="greennature-payment-lightbox-overlay"
-        id="greennature-payment-lightbox-overlay"
-      ></div>
-      <div
-        class="greennature-payment-lightbox-container"
-        id="greennature-payment-lightbox-container"
-      >
-        <div class="greennature-payment-lightbox-inner">
-          <form class="greennature-payment-form" id="greennature-payment-form">
-            <h3 class="greennature-payment-lightbox-title">
-              <span class="greennature-head">You are donating to :</span>
-              <span class="greennature-tail">Greennature Foundation</span>
-            </h3>
-
-            <div class="greennature-payment-amount">
-              <div class="greennature-payment-amount-head">
-                How much would you like to donate?
-              </div>
-              <a
-                class="greennature-payment-price-preset greennature-active"
-                data-val="10"
-                >$10</a
-              >
-              <a class="greennature-payment-price-preset" data-val="20">$20</a>
-              <a class="greennature-payment-price-preset" data-val="30">$30</a>
-              <input
-                class="greennature-payment-price-fill"
-                type="text"
-                placeholder="Or Your Amount(USD)"
-              />
-              <input
-                class="greennature-payment-price"
-                type="hidden"
-                name="amount"
-                value="10"
-              />
-
-              <input
-                class="greennature-payment-price"
-                type="hidden"
-                name="a3"
-                value="10"
-              />
-            </div>
-
-            <div class="greennature-paypal-attribute">
-              <span class="greennature-head"
-                >Would you like to make regular donations?</span
-              >
-              <span class="greennature-subhead">I would like to make </span>
-              <select name="t3" class="greennature-recurring-option">
-                <option value="0">one time</option>
-                <option value="W">weekly</option>
-                <option value="M">monthly</option>
-                <option value="Y">yearly</option>
-              </select>
-              <span class="greennature-subhead">donation(s)</span>
-              <input type="hidden" name="p3" value="1" />
-              <div class="greennature-recurring-time-wrapper">
-                <span class="greennature-subhead"
-                  >How many times would you like this to recur? (including this
-                  payment) *</span
-                >
-                <select name="srt" class="greennature-recurring-option">
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                </select>
-              </div>
-              <input type="hidden" name="cmd" value="_xclick" />
-              <input type="hidden" name="bn" value="PP-BuyNowBF" />
-              <input type="hidden" name="src" value="1" />
-              <input type="hidden" name="sra" value="1" />
-            </div>
-
-            <div class="greennature-form-fields">
-              <div class="six columns">
-                <div class="columns-wrap greennature-left">
-                  <span class="greennature-head">Name *</span>
-                  <input class="greennature-require" type="text" name="name" />
-                </div>
-              </div>
-              <div class="six columns">
-                <div class="columns-wrap greennature-right">
-                  <span class="greennature-head">Last Name *</span>
-                  <input
-                    class="greennature-require"
-                    type="text"
-                    name="last-name"
-                  />
-                </div>
-              </div>
-              <div class="clear"></div>
-              <div class="six columns">
-                <div class="columns-wrap greennature-left">
-                  <span class="greennature-head">Email *</span>
-                  <input
-                    class="greennature-require greennature-email"
-                    type="text"
-                    name="email"
-                  />
-                </div>
-              </div>
-              <div class="six columns">
-                <div class="columns-wrap greennature-right">
-                  <span class="greennature-head">Phone</span>
-                  <input type="text" name="phone" />
-                </div>
-              </div>
-              <div class="clear"></div>
-              <div class="six columns">
-                <div class="columns-wrap greennature-left">
-                  <span class="greennature-head">Address</span>
-                  <textarea name="address"></textarea>
-                </div>
-              </div>
-              <div class="six columns">
-                <div class="columns-wrap greennature-right">
-                  <span class="greennature-head">Additional Note</span>
-                  <textarea name="additional-note"></textarea>
-                </div>
-              </div>
-              <div class="clear"></div>
-            </div>
-
-            <div class="greennature-payment-method">
-              <img
-                class="greennature-active"
-                src="images/paypal.png"
-                alt="paypal"
-              /><img src="images/stripe.png" alt="stripe" />
-              <input type="hidden" name="payment-method" value="paypal" />
-            </div>
-            <div class="greennature-message"></div>
-            <div class="greennature-loading">Loading...</div>
-            <input type="submit" value="Donate Now" />
-          </form>
-        </div>
-      </div>
+    
+    
     </div>
     <!-- body-wrapper -->
+     
     <script type="module" src="js/general.js"></script>
     <script type="module" src="js/blogs.js"></script>
+    
     <script type="text/javascript" src="js/jquery/jquery.js"></script>
     <script
       type="text/javascript"

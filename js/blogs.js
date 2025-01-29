@@ -1,5 +1,5 @@
 import { ENV_URL } from "./config.js";
-import { mapDate } from "./trim.js";
+import { trimStringLong,mapDate } from "./trim.js";
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL; 
 
@@ -55,105 +55,202 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
 
 //images section
 getPostsBySubcategory("blogs", "content").then((posts) => {
-  const contentWrapper = document.getElementById("content-blogs");
+  const contentWrapper = document.getElementById("data-container");
 
   if (posts.length > 0) {
-    
     posts.reverse();
     posts.forEach((post) => {
       const dateX = post.date;
-      
+
       mapDate(dateX).then(
         function (value) {
           const dayOfPost = value.getToday;
           const yearOfPost = value.getThatYear;
           const monthOfPost = value.getMonth;
-      contentWrapper.innerHTML += `<div class="twelve columns">
-                              <div
-                                class="greennature-item greennature-blog-grid greennature-skin-box"
-                              >
-                                <div
-                                  class="greennature-ux greennature-blog-grid-ux"
-                                >
-                                  <article
-                                    id="post-852"
-                                    class="post-852 post type-post status-publish format-standard has-post-thumbnail hentry category-fit-row tag-blog tag-life-style"
-                                  >
+          const content = trimStringLong(post.content.rendered,150);
+          const cardHTML = `<div class="twelve columns card">
+                              <div class="greennature-item greennature-blog-grid greennature-skin-box">
+                                <div class="greennature-ux greennature-blog-grid-ux">
+                                  <article class="post">
                                     <div class="greennature-standard-style">
                                       <div id="blog" class="greennature-blog-thumbnail">
-                                        <a
-                                          href="../2013/12/11/donec-luctus-imperdiet/index.html"
-                                        >
-                                          <img
-                                            src=${post._embedded["wp:featuredmedia"][0].source_url}
-                                            alt=""
-                                            width="960"
-                                            height="638"
-                                        /></a>
+                                        <a href="${post.link}">
+                                          <img src="${post._embedded["wp:featuredmedia"][0].source_url}" alt="Post Image" width="960" height="638"/>
+                                        </a>
                                       </div>
-
-                                      <div
-                                        class="greennature-blog-grid-content"
-                                      >
+                                      <div class="greennature-blog-grid-content">
                                         <header class="post-header">
                                           <h3 class="greennature-blog-title">
-                                            <a
-                                              href="../2013/12/11/donec-luctus-imperdiet/index.html"
-                                              >${post.title.rendered}</a
-                                            >
+                                            <a href="${post.link}">${post.title.rendered}</a>
                                           </h3>
-
                                           <div class="greennature-blog-info">
-                                            <div
-                                              class="blog-info blog-date greennature-skin-info"
-                                            >
-                                              <i class="fa fa-clock-o"></i
-                                              ><a
-                                                href="../2013/12/11/index.html"
-                                                >${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}</a
-                                              >
+                                            <div class="blog-info blog-date">
+                                              <i class="fa fa-clock-o"></i>
+                                              <a href="#">${dayOfPost} ${monthOfPost} ${yearOfPost}</a>
                                             </div>
-                                            <div
-                                              class="blog-info blog-comment greennature-skin-info"
-                                            >
-                                              <i class="fa fa-comment-o"></i
-                                              ><a
-                                                href="../2013/12/11/donec-luctus-imperdiet/index.html#respond"
-                                                >2
-                                                <span class="greennature-tail"
-                                                  >Comments</span
-                                                ></a
-                                              >
-                                            </div>
-                                            <div class="clear"></div>
                                           </div>
-                                          <div class="clear"></div>
                                         </header>
-                                        <!-- entry-header -->
-
                                         <div class="greennature-blog-content">
-                                          ${post.content.rendered}
-                                          <div class="clear"></div>
-                                          <a
-                                            href="../2013/12/11/donec-luctus-imperdiet/index.html"
-                                            class="excerpt-read-more"
-                                            >Read More</a
-                                          >
+                                          ${content}
+                                          
                                         </div>
+                                        <a href="${post.link}" class="excerpt-read-more">Read More</a>
                                       </div>
                                     </div>
                                   </article>
-                                  <!-- #post -->
                                 </div>
                               </div>
+                            </div>`;
+          contentWrapper.innerHTML += cardHTML;
+
+          // After all posts are loaded, update pagination
+          if (contentWrapper.children.length === posts.length) {
+            initializePagination();
+          }
+        },
+        function (error) {
+          console.error(error);
+        }
+      );
+    });
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+// Initialize pagination after loading posts
+function initializePagination() {
+  const cardsPerPage = 2; // Adjust as needed
+  const dataContainer = document.getElementById('data-container');
+  const pagination = document.getElementById('pagination');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+ 
+  const pageLinksContainer = document.getElementById('page-links'); // Number container
+  
+  const cards = Array.from(dataContainer.getElementsByClassName('card'));
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(cards.length / cardsPerPage);
+  let currentPage = 1;
+  
+  // Function to display the correct set of cards
+  function displayPage(page) {
+      const startIndex = (page - 1) * cardsPerPage;
+      const endIndex = startIndex + cardsPerPage;
+  
+      cards.forEach((card, index) => {
+          card.style.display = (index >= startIndex && index < endIndex) ? 'block' : 'none';
+      });
+  
+      updatePagination();
+  }
+  
+  // Function to update pagination numbers and buttons
+  function updatePagination() {
+     
+      
+      // Enable/disable prev & next buttons
+      prevButton.style.pointerEvents = currentPage === 1 ? "none" : "auto";
+      nextButton.style.pointerEvents = currentPage === totalPages ? "none" : "auto";
+      prevButton.classList.toggle("disabled", currentPage === 1);
+      nextButton.classList.toggle("disabled", currentPage === totalPages);
+  
+      // Clear existing numbers and regenerate
+      pageLinksContainer.innerHTML = '';
+  
+      for (let i = 1; i <= totalPages; i++) {
+          const pageLink = document.createElement('a');
+          pageLink.href = "#";
+          pageLink.classList.add('page-numbers', 'page-link');
+          pageLink.dataset.page = i;
+          pageLink.textContent = i;
+  
+          // Highlight the current page
+          if (i === currentPage) {
+              pageLink.classList.add('current');
+          }
+  
+          pageLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              goToPage(i);
+          });
+  
+          pageLinksContainer.appendChild(pageLink);
+      }
+  }
+  
+  // Function to navigate pages
+  function goToPage(page) {
+      if (page >= 1 && page <= totalPages) {
+          currentPage = page;
+          displayPage(currentPage);
+      }
+  }
+  
+  // Event listeners for Prev/Next buttons
+  prevButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage > 1) goToPage(currentPage - 1);
+  });
+  
+  nextButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage < totalPages) goToPage(currentPage + 1);
+  });
+  
+  // Initial page load
+  displayPage(currentPage);
+  
+}
+
+// Recent works section
+getPostsBySubcategory("blogs", "content").then((posts) => {
+  const projectSection = document.getElementById("recent");
+  if (posts.length > 0) {
+    const filteredPost = posts.slice(0, 2);
+
+    filteredPost.forEach((post) => {
+      const dateX = post.date;
+
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          projectSection.innerHTML += `<div class="recent-post-widget">
+                        <div class="recent-post-widget-thumbnail">
+                          <a href="../portfolio/wind-energy/index.html"
+                            ><img
+                              src="${post._embedded["wp:featuredmedia"][0].source_url}"
+                              alt=""
+                              width="150"
+                              height="150"
+                          /></a>
+                        </div>
+                        <div class="recent-post-widget-content">
+                          <div class="recent-post-widget-title">
+                           ${post.title.rendered}
+                          </div>
+                          <div class="recent-post-widget-info">
+                            <div
+                              class="blog-info blog-date greennature-skin-info"
+                            >
+                              <i class="fa fa-clock-o"></i
+                              >
+                                ${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}
                             </div>
-                            <div class="clear"></div>`;
-                          },
-                          function (error) {
-                            return error;
-                          }
-                        );
-                      });
+                            <div class="clear"></div>
+                          </div>
+                        </div>
+                        <div class="clear"></div>
+                      </div>`;
+        },
+        function (error) {
+          console.error("Error formatting date:", error);
+        }
+      );
+    });
   } else {
     console.log("No posts found in the specified subcategory");
   }

@@ -59,7 +59,7 @@ getPostsBySubcategory("initiatives", "images").then((posts) => {
 
   if (posts.length > 0) {
     posts.forEach((post) => {
-      imageWrapper.innerHTML += ` <div class="greennature-stack-image">
+      imageWrapper.innerHTML += ` <div id="event" class="greennature-stack-image">
                               <a
                                 href="${post._embedded["wp:featuredmedia"][0].source_url}"
                                 data-fancybox-group="greennature-gal-1"
@@ -67,8 +67,7 @@ getPostsBySubcategory("initiatives", "images").then((posts) => {
                                 ><img
                                   src="${post._embedded["wp:featuredmedia"][0].source_url}"
                                   alt=""
-                                  width="1280"
-                                  height="853"
+                                  
                               /></a>
                             </div>`;
     });

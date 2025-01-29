@@ -360,18 +360,18 @@
                             class="greennature-isotope"
                             data-type="blog"
                             data-layout="fitRows"
-                            id="content-events"
+                            id="data-container"
                           ></div>
                         </div>
-                        <div class="greennature-pagination">
-                          <span aria-current="page" class="page-numbers current"
-                            >1</span
-                          >
-                          <a class="page-numbers" href="page/2/index.html">2</a>
-                          <a class="next page-numbers" href="page/2/index.html"
-                            >Next &rsaquo;</a
-                          >
-                        </div>
+                        <div class="greennature-pagination" id="pagination" role="navigation">
+                          <a id="prev" class="prev page-numbers" href="#">&lsaquo; Prev</a>
+                          
+                          <span id="page-links"></span> <!-- Page numbers dynamically inserted here -->
+                          
+                          <a id="next" class="next page-numbers" href="#">Next &rsaquo;</a>
+                          
+                         
+                      </div>
                       </div>
                       <div class="clear"></div>
                     </div>
@@ -413,13 +413,11 @@
                     id="text-2"
                     class="widget widget_text greennature-item greennature-widget"
                   >
-                    <h3 class="greennature-widget-title">Text Widget</h3>
+                    <h3 class="greennature-widget-title">Did You KnoW</h3>
                     <div class="clear"></div>
                     <div class="textwidget">
-                      Sed posuere consectetur est at lobortis. Donec id elit non
-                      mi porta gravida at eget metus. Lorem ipsum dolor sit
-                      amet, consectetur adipiscing elit. Nullam id dolor id nibh
-                      ultricies vehicula ut id elit.
+                      Sure! 🌳 Trees are nature's air purifiers. They absorb carbon dioxide and release oxygen, helping to fight climate change. Each tree we plant makes our planet healthier and greener. 🌍💚
+
                     </div>
                   </div>
                   <div
@@ -428,99 +426,8 @@
                   >
                     <h3 class="greennature-widget-title">Recent Works</h3>
                     <div class="clear"></div>
-                    <div class="greennature-recent-port-widget">
-                      <div class="recent-post-widget">
-                        <div class="recent-post-widget-thumbnail">
-                          <a href="../portfolio/wind-energy/index.html"
-                            ><img
-                              src="upload/shutterstock_161515241-150x150.jpg"
-                              alt=""
-                              width="150"
-                              height="150"
-                          /></a>
-                        </div>
-                        <div class="recent-post-widget-content">
-                          <div class="recent-post-widget-title">
-                            <a href="../portfolio/wind-energy/index.html"
-                              >Wind Energy</a
-                            >
-                          </div>
-                          <div class="recent-post-widget-info">
-                            <div
-                              class="blog-info blog-date greennature-skin-info"
-                            >
-                              <i class="fa fa-clock-o"></i
-                              ><a href="../2013/12/04/index.html"
-                                >04 Dec 2013</a
-                              >
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div class="clear"></div>
-                      </div>
-                      <div class="recent-post-widget">
-                        <div class="recent-post-widget-thumbnail">
-                          <a href="../portfolio/elephant-sanctuary/index.html"
-                            ><img
-                              src="upload/shutterstock_133689230-150x150.jpg"
-                              alt=""
-                              width="150"
-                              height="150"
-                          /></a>
-                        </div>
-                        <div class="recent-post-widget-content">
-                          <div class="recent-post-widget-title">
-                            <a href="../portfolio/elephant-sanctuary/index.html"
-                              >Elephant Sanctuary</a
-                            >
-                          </div>
-                          <div class="recent-post-widget-info">
-                            <div
-                              class="blog-info blog-date greennature-skin-info"
-                            >
-                              <i class="fa fa-clock-o"></i
-                              ><a href="../2013/12/04/index.html"
-                                >04 Dec 2013</a
-                              >
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div class="clear"></div>
-                      </div>
-                      <div class="recent-post-widget">
-                        <div class="recent-post-widget-thumbnail">
-                          <a
-                            href="../portfolio/conservation-volunteering/index.html"
-                            ><img
-                              src="upload/shutterstock_53600221-150x150.jpg"
-                              alt=""
-                              width="150"
-                              height="150"
-                          /></a>
-                        </div>
-                        <div class="recent-post-widget-content">
-                          <div class="recent-post-widget-title">
-                            <a
-                              href="../portfolio/conservation-volunteering/index.html"
-                              >Conservation Volunteer</a
-                            >
-                          </div>
-                          <div class="recent-post-widget-info">
-                            <div
-                              class="blog-info blog-date greennature-skin-info"
-                            >
-                              <i class="fa fa-clock-o"></i
-                              ><a href="../2013/12/04/index.html"
-                                >04 Dec 2013</a
-                              >
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                        <div class="clear"></div>
-                      </div>
+                    <div id="recent" class="greennature-recent-port-widget">
+                     
                       <div class="clear"></div>
                     </div>
                   </div>

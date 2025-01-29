@@ -56,7 +56,7 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
 
 //images section
 getPostsBySubcategory("events", "content-events").then((posts) => {
-  const contentWrapper = document.getElementById("content-events");
+  const contentWrapper = document.getElementById("data-container");
 
   if (posts.length > 0) {
     posts.forEach((post) => {
@@ -68,7 +68,7 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
           const yearOfPost = value.getThatYear;
           const monthOfPost = value.getMonth;
           const content = trimString(post.content.rendered);
-          contentWrapper.innerHTML += `<div class="six columns">
+          contentWrapper.innerHTML += `<div class="six columns card">
       <div
         class="greennature-item greennature-blog-grid greennature-skin-box"
       >
@@ -145,9 +145,153 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
       </div>
     </div>
     `;
+
+       // After all posts are loaded, update pagination
+       if (contentWrapper.children.length === posts.length) {
+        initializePagination();
+      }
         },
         function (error) {
           return error;
+        }
+      );
+    });
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+
+// Initialize pagination after loading posts
+function initializePagination() {
+  const cardsPerPage = 4; // Adjust as needed
+  const dataContainer = document.getElementById('data-container');
+  const pagination = document.getElementById('pagination');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+ 
+  const pageLinksContainer = document.getElementById('page-links'); // Number container
+  
+  const cards = Array.from(dataContainer.getElementsByClassName('card'));
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(cards.length / cardsPerPage);
+  let currentPage = 1;
+  
+  // Function to display the correct set of cards
+  function displayPage(page) {
+      const startIndex = (page - 1) * cardsPerPage;
+      const endIndex = startIndex + cardsPerPage;
+  
+      cards.forEach((card, index) => {
+          card.style.display = (index >= startIndex && index < endIndex) ? 'block' : 'none';
+      });
+  
+      updatePagination();
+  }
+  
+  // Function to update pagination numbers and buttons
+  function updatePagination() {
+     
+      
+      // Enable/disable prev & next buttons
+      prevButton.style.pointerEvents = currentPage === 1 ? "none" : "auto";
+      nextButton.style.pointerEvents = currentPage === totalPages ? "none" : "auto";
+      prevButton.classList.toggle("disabled", currentPage === 1);
+      nextButton.classList.toggle("disabled", currentPage === totalPages);
+  
+      // Clear existing numbers and regenerate
+      pageLinksContainer.innerHTML = '';
+  
+      for (let i = 1; i <= totalPages; i++) {
+          const pageLink = document.createElement('a');
+          pageLink.href = "#";
+          pageLink.classList.add('page-numbers', 'page-link');
+          pageLink.dataset.page = i;
+          pageLink.textContent = i;
+  
+          // Highlight the current page
+          if (i === currentPage) {
+              pageLink.classList.add('current');
+          }
+  
+          pageLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              goToPage(i);
+          });
+  
+          pageLinksContainer.appendChild(pageLink);
+      }
+  }
+  
+  // Function to navigate pages
+  function goToPage(page) {
+      if (page >= 1 && page <= totalPages) {
+          currentPage = page;
+          displayPage(currentPage);
+      }
+  }
+  
+  // Event listeners for Prev/Next buttons
+  prevButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage > 1) goToPage(currentPage - 1);
+  });
+  
+  nextButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage < totalPages) goToPage(currentPage + 1);
+  });
+  
+  // Initial page load
+  displayPage(currentPage);
+  
+}
+
+// Recent works section
+getPostsBySubcategory("events", "content-events").then((posts) => {
+  const projectSection = document.getElementById("recent");
+  if (posts.length > 0) {
+    const filteredPost = posts.slice(0, 2);
+
+    filteredPost.forEach((post) => {
+      const dateX = post.date;
+
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          projectSection.innerHTML += `<div class="recent-post-widget">
+                        <div class="recent-post-widget-thumbnail">
+                          <a href="../portfolio/wind-energy/index.html"
+                            ><img
+                              src="${post._embedded["wp:featuredmedia"][0].source_url}"
+                              alt=""
+                              width="150"
+                              height="150"
+                          /></a>
+                        </div>
+                        <div class="recent-post-widget-content">
+                          <div class="recent-post-widget-title">
+                           ${post.title.rendered}
+                          </div>
+                          <div class="recent-post-widget-info">
+                            <div
+                              class="blog-info blog-date greennature-skin-info"
+                            >
+                              <i class="fa fa-clock-o"></i
+                              >
+                                ${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}
+                            </div>
+                            <div class="clear"></div>
+                          </div>
+                        </div>
+                        <div class="clear"></div>
+                      </div>`;
+        },
+        function (error) {
+          console.error("Error formatting date:", error);
         }
       );
     });
