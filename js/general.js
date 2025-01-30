@@ -58,7 +58,8 @@ getPostsBySubcategory("general-content", "logo").then((posts) => {
   const contentWrapper = document.getElementById("favicon");
 
   if (posts.length > 0) {
-    contentWrapper.href = `${posts[0]._embedded["wp:featuredmedia"][0].source_url}`;
+    contentWrapper.href = 'images/favicon.ico' ||  `${posts[0]._embedded["wp:featuredmedia"][0].source_url}`;
+
   } else {
     console.log("No posts found in the specified subcategory");
   }
