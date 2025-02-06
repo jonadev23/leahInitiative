@@ -1,4 +1,5 @@
 import { ENV_URL } from "./config.js";
+import { mapDate,trimString } from "./trim.js";
 
 // Define the base URL manually for different environments
 const BASE_URL = ENV_URL; 
@@ -153,6 +154,98 @@ getPostsBySubcategory("initiatives", "achievements").then((posts) => {
     achievementsTitle.innerHTML = posts[0].title.rendered;
     achievementsCaption.innerHTML = posts[0].excerpt.rendered;
     achievementsDescription.innerHTML = posts[0].content.rendered;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
+
+
+// Recent works section
+getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
+  const projectSection = document.getElementById("recent");
+  if (posts.length > 0) {
+    const filteredPost = posts.slice(0, 3);
+
+    filteredPost.forEach((post) => {
+      const dateX = post.date;
+
+      mapDate(dateX).then(
+        function (value) {
+          const dayOfPost = value.getToday;
+          const yearOfPost = value.getThatYear;
+          const monthOfPost = value.getMonth;
+          const content = trimString(post.content.rendered)
+          projectSection.innerHTML += ` <div id="proj" class="three columns">
+                        <div
+                          class="greennature-item greennature-portfolio-item greennature-classic-portfolio"
+                        >
+                          <div
+                            class="greennature-ux greennature-classic-portfolio-ux"
+                          >
+                            <div class="portfolio-thumbnail greennature-image">
+                              <img
+                                src="${post._embedded["wp:featuredmedia"][0].source_url}"
+                                alt=""
+                                width="700"
+                                height="400"
+                              /><span class="portfolio-overlay">&nbsp;</span
+                              ><a
+                                class="portfolio-overlay-icon"
+                                href="https://vimeo.com/101707505"
+                                data-rel="fancybox"
+                                data-fancybox-type="iframe"
+                                ><span class="portfolio-icon"
+                                  ><i class="fa fa-film"></i></span
+                              ></a>
+                            </div>
+                            <div class="portfolio-classic-content">
+                              <h3 class="portfolio-title">
+                                <a
+                                  href="../conservation-volunteering/index.html"
+                                  >${post.title.rendered}</a
+                                >
+                              </h3>
+                              <div class="greennature-portfolio-info">
+                                <div class="portfolio-info portfolio-tag">
+                                  <span class="info-head greennature-title"
+                                    >Tags </span
+                                  ><a
+                                    href="../../portfolio_tag/cleaning/index.html"
+                                    rel="tag"
+                                    >Cleaning</a
+                                  ><span class="sep">,</span>
+                                  <a
+                                    href="../../portfolio_tag/volunteer/index.html"
+                                    rel="tag"
+                                    >Volunteer</a
+                                  >
+                                </div>
+                                <div class="clear"></div>
+                              </div>
+                              <div class="portfolio-excerpt">
+                                 ${content}
+                                <div class="clear"></div>
+                                <a
+                                  href="../conservation-volunteering/index.html"
+                                  class="excerpt-read-more"
+                                  >Read More</a
+                                >
+                              </div>
+                              <a
+                                class="portfolio-classic-learn-more"
+                                href="../conservation-volunteering/index.html"
+                                >Learn More</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>`;
+        },
+        function (error) {
+          console.error("Error formatting date:", error);
+        }
+      );
+    });
   } else {
     console.log("No posts found in the specified subcategory");
   }

@@ -98,7 +98,7 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
                 <header class="post-header">
                   <h3 class="greennature-blog-title">
                     <a
-                      href="../2013/12/09/magna-pars-studiorum/index.html"
+                      href="single-event.html?id=${post.id}"
                       >${post.title.rendered}</a
                     >
                   </h3>
@@ -264,7 +264,7 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
           const monthOfPost = value.getMonth;
           projectSection.innerHTML += `<div class="recent-post-widget">
                         <div class="recent-post-widget-thumbnail">
-                          <a href="../portfolio/wind-energy/index.html"
+                          <a  href="single-event.html?id=${post.id}"
                             ><img
                               src="${post._embedded["wp:featuredmedia"][0].source_url}"
                               alt=""
@@ -274,7 +274,8 @@ getPostsBySubcategory("events", "content-events").then((posts) => {
                         </div>
                         <div class="recent-post-widget-content">
                           <div class="recent-post-widget-title">
-                           ${post.title.rendered}
+                          <a  href="single-event.html?id=${post.id}">
+                           ${post.title.rendered}</a>
                           </div>
                           <div class="recent-post-widget-info">
                             <div

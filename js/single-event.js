@@ -116,7 +116,7 @@ fetchPosts().then((post) => {
                                                 >${dayOfPost}&nbsp;${monthOfPost}&nbsp;${yearOfPost}</a
                                               >
                                             </div>
-                                            
+                                           
                                             <div class="clear"></div>
                                           </div>
                                           <div class="clear"></div>
@@ -148,7 +148,7 @@ fetchPosts().then((post) => {
 });
 
 // Recent works section
-getPostsBySubcategory("projects-2", "content-projects-2").then((posts) => {
+getPostsBySubcategory("events", "content-events").then((posts) => {
   const projectSection = document.getElementById("recent");
   if (posts.length > 0) {
     const filteredPost = posts.slice(0, 2);

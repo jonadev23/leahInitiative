@@ -310,51 +310,110 @@ getPostsBySubcategory("homepage", "video").then((posts) => {
 });
 
 //testimonial section
+// getPostsBySubcategory("homepage", "testimonial").then((posts) => {
+//   const testimonialSection = document.getElementById("testimonial-section");
+
+//   if (posts.length > 0) {
+//     posts.reverse();
+//     // Create ul element first
+//     testimonialSection.innerHTML = '<ul class="slides">';
+
+//     posts.forEach((post) => {
+//       testimonialSection.innerHTML += `<li class="testimonial-item">
+//                                 <div class="testimonial-content-wrapper">
+//                                   <div
+//                                     class="testimonial-content greennature-skin-content"
+//                                   >
+//                                     ${post.content.rendered}
+//                                   </div>
+//                                   <div class="testimonial-info">
+//                                     <div
+//                                       class="testimonial-author-image greennature-skin-border"
+//                                     >
+//                                       <img
+//                                           src=${post._embedded["wp:featuredmedia"][0].source_url}
+//                                           alt=""
+//                                         width="150"
+//                                         height="150"
+//                                       />
+//                                     </div>
+//                                     <span
+//                                       class="testimonial-author greennature-skin-link-color"
+//                                       >${post.title.rendered}<span>, </span></span
+//                                     ><span
+//                                       class="testimonial-position greennature-skin-info"
+//                                       >${post.excerpt.rendered}</span
+//                                     >
+//                                   </div>
+//                                 </div>
+//                               </li>`;
+//     });
+
+//     // Close the ul element
+//     testimonialSection.innerHTML += "</ul>";
+//   } else {
+//     console.log("No posts found in the specified subcategory");
+//   }
+// });
 getPostsBySubcategory("homepage", "testimonial").then((posts) => {
   const testimonialSection = document.getElementById("testimonial-section");
 
   if (posts.length > 0) {
     posts.reverse();
-    // Create ul element first
-    testimonialSection.innerHTML = '<ul class="slides">';
+
+    // Create ul element
+    const ul = document.createElement("ul");
+    ul.classList.add("slides");
 
     posts.forEach((post) => {
-      testimonialSection.innerHTML += `<li class="testimonial-item">
-                                <div class="testimonial-content-wrapper">
-                                  <div
-                                    class="testimonial-content greennature-skin-content"
-                                  >
-                                    ${post.content.rendered}
-                                  </div>
-                                  <div class="testimonial-info">
-                                    <div
-                                      class="testimonial-author-image greennature-skin-border"
-                                    >
-                                      <img
-                                          src=${post._embedded["wp:featuredmedia"][0].source_url}
-                                          alt=""
-                                        width="150"
-                                        height="150"
-                                      />
-                                    </div>
-                                    <span
-                                      class="testimonial-author greennature-skin-link-color"
-                                      >${post.title.rendered}<span>, </span></span
-                                    ><span
-                                      class="testimonial-position greennature-skin-info"
-                                      >${post.excerpt.rendered}</span
-                                    >
-                                  </div>
-                                </div>
-                              </li>`;
+      const li = document.createElement("li");
+      li.classList.add("testimonial-item");
+
+      li.innerHTML = `
+        <div class="testimonial-content-wrapper">
+          <div class="testimonial-content greennature-skin-content">
+            ${post.content.rendered}
+          </div>
+          <div class="testimonial-info">
+            <div class="testimonial-author-image greennature-skin-border">
+              <img src="${
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || ""
+              }" alt="${post.title.rendered}" width="150" height="150" />
+            </div>
+            <span class="testimonial-author greennature-skin-link-color">
+              ${post.title.rendered}
+              <span>, </span>
+            </span>
+            <span class="testimonial-position greennature-skin-info">
+              ${post.excerpt.rendered}
+            </span>
+          </div>
+        </div>
+      `;
+
+      ul.appendChild(li);
     });
 
-    // Close the ul element
-    testimonialSection.innerHTML += "</ul>";
+    // Clear previous content & append new slides
+    testimonialSection.innerHTML = "";
+    testimonialSection.appendChild(ul);
+
+    // Wait for DOM update, then reinitialize FlexSlider
+    setTimeout(() => {
+      $(".flexslider").flexslider({
+        animation: "slide",
+        controlNav: true,
+        directionNav: false,
+        slideshow: true,
+        slideshowSpeed: 4000,
+        itemWidth: 300, // Adjust width if needed
+      });
+    }, 100);
   } else {
     console.log("No posts found in the specified subcategory");
   }
 });
+
 
 //newsletter section
 getPostsBySubcategory("homepage", "newsletter").then((posts) => {

@@ -9,13 +9,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1.0" />
     <meta name="description" content="The Leah Initiative is an environmental NGO founded by Leah Namugerwa, focusing on climate advocacy and conservation efforts in Uganda. The organization promotes tree planting, recycling, and community engagement to combat climate change." />
-    <title>Get Involved</title>
-    <!-- favicon -->
-    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
-    <link rel="shortcut icon" href="images/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-    <link rel="manifest" href="images/site.webmanifest" />
+    <title>Content</title>
+   <!-- favicon -->
+   <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
+<link rel="manifest" href="images/site.webmanifest" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Lato%3A100%2C100italic%2C300%2C300italic%2Cregular%2Citalic%2C700%2C700italic%2C900%2C900italic&amp;subset=latin&amp;"
@@ -60,6 +60,7 @@
       type="text/css"
       media="all"
     />
+    <link rel="stylesheet" href="./css/responsive.css" />
     <link
       rel="stylesheet"
       href="plugins/elegant-font/style.css"
@@ -102,41 +103,6 @@
       type="text/css"
       media="all"
     />
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- script for EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            // https://dashboard.emailjs.com/admin/account
-            emailjs.init({
-              publicKey: "nz4pzjxI_oa2yO4gc",
-            });
-        })();
-    </script>
-    <script type="text/javascript">
-      window.onload = function() {
-          // Clear the form on page load
-          const form = document.getElementById('contact-form-1');
-          if (form) {
-              form.reset();
-          }
-  
-          // Add submit event listener to handle email sending
-          form.addEventListener('submit', function(event) {
-              event.preventDefault(); // Prevent default form submission
-              
-              // Sending form data using EmailJS
-              emailjs.sendForm('contact_service', 'contact_form', this)
-                  .then(() => {
-                      alert('SUCCESS!');
-                      // Clear the form after successful submission
-                      form.reset();
-                  }, (error) => {
-                      alert('FAILED...', error);
-                  });
-          });
-      };
-  </script>
   </head>
 
   <!-- Google tag (gtag.js) -->
@@ -222,7 +188,7 @@
               <li
                 class="menu-item menu-item-home current-menu-item page_item page-item-5680 current_page_item"
               >
-                <a href="index.html">Home</a>
+                <a href="index.html" >Home</a>
               </li>
               <li class="menu-item menu-item-has-children menu-item-15">
                 <a href="#">Pages</a>
@@ -234,7 +200,7 @@
                     <a href="initiatives.html">Initiatives</a>
                   </li>
                   <li class="menu-item">
-                    <a href="get-involved.html" aria-current="page">Get Involved</a>
+                    <a href="get-involved.html">Get Involved</a>
                   </li>
                  
                   <li class="menu-item">
@@ -284,12 +250,12 @@
           >
             <ul id="menu-main-menu-1" class="sf-menu greennature-main-menu">
               <li
-                class="menu-item"
+                class="menu-item menu-item-home current-menu-item greennature-normal-menu"
               >
                 <a href="index.html"><i class="fa fa-home"></i>Home</a>
               </li>
               <li
-                class="menu-item menu-item-has-children greennature-normal-menu  menu-item-home current-menu-item greennature-normal-menu"
+                class="menu-item menu-item-has-children greennature-normal-menu"
               >
                 <a href="#" class="sf-with-ul-pre"
                   ><i class="fa fa-file-text-o"></i>Pages</a
@@ -302,7 +268,7 @@
                   <li class="menu-item">
                     <a href="initiatives.html">Initiatives</a>
                   </li>
-                  <li class="menu-item  menu-item-home current-menu-item page_item page-item-5680 current_page_item">
+                  <li class="menu-item">
                     <a href="get-involved.html">Get Involved</a>
                   </li>
                   
@@ -374,9 +340,10 @@
 
       <div class="greennature-page-title-wrapper header-style-5-title-wrapper">
         <div class="greennature-page-title-overlay"></div>
-        <div class="greennature-page-title-container container">
-          <h1 class="greennature-page-title">Get Involved</h1>
-        </div>
+        <!-- <div class="greennature-page-title-container container">
+          <h1 class="greennature-page-title">Blog 1 Column</h1>
+          <span class="greennature-page-caption">Caption placed here</span>
+        </div> -->
       </div>
       <!-- is search -->
       <div class="content-wrapper">
@@ -386,7 +353,7 @@
           <!-- Sidebar With Content Section-->
           <div class="with-sidebar-wrapper">
             <div class="with-sidebar-container container">
-              <div class="with-sidebar-left twelve columns">
+              <div class="with-sidebar-left eight columns">
                 <div class="with-sidebar-content twelve columns">
                   <section id="content-section-1">
                     <div class="section-container container">
@@ -396,22 +363,22 @@
                             class="greennature-isotope"
                             data-type="blog"
                             data-layout="fitRows"
-                            id="data-container"
+                            id="singlePostContent"
                           >
                             <div class="clear"></div>
 
                             <div class="clear"></div>
                           </div>
                         </div>
-                        <div class="greennature-pagination" id="pagination" role="navigation">
-                          <a id="prev" class="prev page-numbers" href="#">&lsaquo; Prev</a>
-                          
-                          <span id="page-links"></span> <!-- Page numbers dynamically inserted here -->
-                          
-                          <a id="next" class="next page-numbers" href="#">Next &rsaquo;</a>
-                          
-                         
-                      </div>
+                        <div class="greennature-pagination">
+                          <span aria-current="page" class="page-numbers current"
+                            >1</span
+                          >
+                          <a class="page-numbers" href="page/2/index.html">2</a>
+                          <a class="next page-numbers" href="page/2/index.html"
+                            >Next &rsaquo;</a
+                          >
+                        </div>
                       </div>
                       <div class="clear"></div>
                     </div>
@@ -420,6 +387,217 @@
 
                 <div class="clear"></div>
               </div>
+
+              <div
+                class="greennature-sidebar greennature-right-sidebar four columns"
+              >
+                <div class="greennature-item-start-content sidebar-right-item">
+                  <div
+                    id="search-3"
+                    class="widget widget_search greennature-item greennature-widget"
+                  >
+                    <div class="gdl-search-form">
+                      <form
+                        method="get"
+                        id="searchform"
+                        action="https://demo.goodlayers.com/greennature//"
+                      >
+                        <div class="search-text" id="search-text">
+                          <input
+                            type="text"
+                            name="s"
+                            id="s"
+                            autocomplete="off"
+                            data-default="Type keywords..."
+                          />
+                        </div>
+                        <input type="submit" id="searchsubmit" value="" />
+                        <div class="clear"></div>
+                      </form>
+                    </div>
+                  </div>
+                  <div
+                    id="text-2"
+                    class="widget widget_text greennature-item greennature-widget"
+                  >
+                    <h3 class="greennature-widget-title">Did You Know</h3>
+                    <div class="clear"></div>
+                    <div class="textwidget">
+                      Sure! 🌳 Trees are nature's air purifiers. They absorb carbon dioxide and release oxygen, helping to fight climate change. Each tree we plant makes our planet healthier and greener. 🌍💚
+
+                    </div>
+                  </div>
+                  <div
+                    id="gdlr-recent-portfolio-widget-2"
+                    class="widget widget_gdlr-recent-portfolio-widget greennature-item greennature-widget"
+                  >
+                    <h3 class="greennature-widget-title">Recent Works</h3>
+                    <div class="clear"></div>
+                    <div id="recent" class="greennature-recent-port-widget">
+                      
+                      
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                  <!-- <div
+                    id="recent-comments-3"
+                    class="widget widget_recent_comments greennature-item greennature-widget"
+                  >
+                    <h3 class="greennature-widget-title">Recent Comments</h3>
+                    <div class="clear"></div>
+                    <ul id="recentcomments">
+                      <li class="recentcomments">
+                        <span class="comment-author-link">John Doe</span> on
+                        <a
+                          href="../product/classy-men-shoes/index.html#comment-39"
+                          >Classy Men Shoes</a
+                        >
+                      </li>
+                      <li class="recentcomments">
+                        <span class="comment-author-link">John Doe</span> on
+                        <a
+                          href="../product/blue-casual-suit/index.html#comment-37"
+                          >Blue Casual Suit</a
+                        >
+                      </li>
+                      <li class="recentcomments">
+                        <span class="comment-author-link">John Doe</span> on
+                        <a href="../product/dark-skirt/index.html#comment-36"
+                          >Dark Skirt</a
+                        >
+                      </li>
+                      <li class="recentcomments">
+                        <span class="comment-author-link">John Doe</span> on
+                        <a href="../product/dark-skirt/index.html#comment-35"
+                          >Dark Skirt</a
+                        >
+                      </li>
+                      <li class="recentcomments">
+                        <span class="comment-author-link">John Doe</span> on
+                        <a
+                          href="../product/handsome-style/index.html#comment-31"
+                          >Handsome Style</a
+                        >
+                      </li>
+                    </ul>
+                  </div> -->
+                  <div
+                    id="tag_cloud-2"
+                    class="widget widget_tag_cloud greennature-item greennature-widget"
+                  >
+                    <h3 class="greennature-widget-title">Tag Cloud</h3>
+                    <div class="clear"></div>
+                    <div class="tagcloud">
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-11 tag-link-position-1"
+                        style="font-size: 8pt"
+                        aria-label="Animal (1 item)"
+                        >Animal</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-12 tag-link-position-2"
+                        style="font-size: 8pt"
+                        aria-label="Aside (1 item)"
+                        >Aside</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-13 tag-link-position-3"
+                        style="font-size: 11.230769230769pt"
+                        aria-label="Audio (2 items)"
+                        >Audio</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-14 tag-link-position-4"
+                        style="font-size: 20.564102564103pt"
+                        aria-label="Blog (9 items)"
+                        >Blog</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-15 tag-link-position-5"
+                        style="font-size: 15.179487179487pt"
+                        aria-label="Business (4 items)"
+                        >Business</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-17 tag-link-position-6"
+                        style="font-size: 13.384615384615pt"
+                        aria-label="identity (3 items)"
+                        >identity</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-74 tag-link-position-7"
+                        style="font-size: 8pt"
+                        aria-label="Life Stlyle (1 item)"
+                        >Life Stlyle</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-18 tag-link-position-8"
+                        style="font-size: 22pt"
+                        aria-label="Life Style (11 items)"
+                        >Life Style</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-19 tag-link-position-9"
+                        style="font-size: 11.230769230769pt"
+                        aria-label="Link (2 items)"
+                        >Link</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-20 tag-link-position-10"
+                        style="font-size: 15.179487179487pt"
+                        aria-label="News (4 items)"
+                        >News</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-21 tag-link-position-11"
+                        style="font-size: 15.179487179487pt"
+                        aria-label="Post format (4 items)"
+                        >Post format</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-22 tag-link-position-12"
+                        style="font-size: 8pt"
+                        aria-label="Quote (1 item)"
+                        >Quote</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-23 tag-link-position-13"
+                        style="font-size: 8pt"
+                        aria-label="Safari (1 item)"
+                        >Safari</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-24 tag-link-position-14"
+                        style="font-size: 8pt"
+                        aria-label="Travel (1 item)"
+                        >Travel</a
+                      >
+                      <a
+                        href="#"
+                        class="tag-cloud-link tag-link-25 tag-link-position-15"
+                        style="font-size: 8pt"
+                        aria-label="Video (1 item)"
+                        >Video</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clear"></div>
             </div>
           </div>
 
@@ -428,131 +606,9 @@
         <!-- greennature-content -->
         <div class="clear"></div>
       </div>
-      <!-- content wrapper -->
-      <!-- subscribe to volunteer -->
-      <section id="content-section-3">
-        <div
-          class="greennature-parallax-wrapper greennature-background-image gdlr-show-all greennature-skin-dark-skin"
-          id="greennature-parallax-wrapper-2"
-          data-bgspeed="0"
-          style="
-            background-color: black;
-            padding-top: 80px;
-            padding-bottom: 15px;
-          "
-        >
-          <div class="container">
-            <div class="greennature-title-item" style="margin-bottom: 45px">
-              <div
-                class="greennature-item-title-wrapper greennature-item greennature-center greennature-large"
-              >
-                <div class="greennature-item-title-container container">
-                  <div class="greennature-item-title-head">
-                    <h3
-                      class="greennature-item-title greennature-skin-title greennature-skin-border"
-                    >
-                      Your Voice To The Team
-                    </h3>
-                    <div
-                      class="greennature-item-title-caption greennature-skin-info"
-                    >
-                      Please fill out your details and press submit
-                    </div>
-                    <div class="clear"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="clear"></div>
-            <div class="greennature-item greennature-content-item">
-              <div
-                role="form"
-                class="wpcf7"
-                id="wpcf7-f5967-o1"
-                lang="en-US"
-                dir="ltr"
-              >
-                <div class="screen-reader-response"></div>
-                <form
-                id="contact-form-1"
-                >
-                <input type="hidden" name="contact_number" value="106372">
-                                              <input type="hidden" name="purpose" value="GetInvolvedForm">
-                                              <input type="hidden" name="to_name" value="LEAH INITIATIVE">
-                  <div class="wpcf7-contact-half-left">
-                   
-                    <p>
-                      <span class="wpcf7-form-control-wrap last-name"
-                        ><input
-                          type="text"
-                          name="user_name"
-                          size="40"
-                          class="input1"
-                          aria-required="true"
-                          aria-invalid="false"
-                          placeholder="*Full Names"
-                      /></span>
-                    </p>
-                    <p>
-                      <span class="wpcf7-form-control-wrap your-email"
-                        ><input
-                          type="email"
-                          id="email"
-                          name="user_email"
-                          size="40"
-                          class="input1"
-                          aria-required="true"
-                          aria-invalid="false"
-                          placeholder="*Email"
-                      /></span>
-                    </p>
-                    <p>
-                      <span class="wpcf7-form-control-wrap address">
-                        <textarea
-                          name="user_address"
-                          cols="40"
-                          rows="10"
-                          class="input1"
-                          aria-invalid="false"
-                          placeholder="*Address"
-                        ></textarea>
-                      </span>
-                    </p>
-                  </div>
-                  <div class="wpcf7-contact-half-right">
-                    <p>
-                      <span class="wpcf7-form-control-wrap your-message">
-                        <textarea
-                          name="message"
-                          cols="40"
-                          rows="10"
-                          class="wpcf7-form-control wpcf7-textarea wpcf7-full"
-                          aria-invalid="false"
-                        ></textarea>
-                      </span>
-                    </p>
-                  </div>
-                  <div class="clear"></div>
-                  <p>
-                    <input
-                      type="submit"
-                      value="Submit My Voice!"
-                      class="wpcf7-form-control wpcf7-submit"
-                    />
-                  </p>
-                  <div class="wpcf7-response-output wpcf7-display-none"></div>
-                </form>
-              </div>
-            </div>
-            <div class="clear"></div>
-            <div class="clear"></div>
-          </div>
-        </div>
-        <div class="clear"></div>
-      </section>
-      <!-- end -->
+       <!-- content wrapper -->
 
-      <footer class="footer-wrapper">
+       <footer class="footer-wrapper">
         <div class="footer-container container">
           <div class="footer-column three columns" id="footer-widget-1">
             <div
@@ -707,8 +763,6 @@
           </div>
         </div>
       </footer>
-
-
       <div
         class="greennature-payment-lightbox-overlay"
         id="greennature-payment-lightbox-overlay"
@@ -859,8 +913,8 @@
       </div>
     </div>
     <!-- body-wrapper -->
-    <script type="module" src="js/general.js"></script>
-    <script type="module" src="js/getinvolved.js"></script>
+     <script type="module"  src="js/general.js"></script>
+    <script type="module" src="js/single-event.js"></script>
     <script type="text/javascript" src="js/jquery/jquery.js"></script>
     <script
       type="text/javascript"

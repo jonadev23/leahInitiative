@@ -56,13 +56,12 @@ async function getPostsBySubcategory(parentSlug, subcategorySlug) {
 
 //images section
 getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
-  const solutionsWrapper = document.getElementById("getinvolved-grid");
+  const solutionsWrapper = document.getElementById("data-container");
 
   if (posts.length > 0) {
     posts.reverse();
 
     posts.forEach((post) => {
-      console.log(post);
       const dateX = post.date;
       mapDate(dateX).then(
         function (value) {
@@ -70,7 +69,7 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
           const yearOfPost = value.getThatYear;
           const monthOfPost = value.getMonth;
           const content = trimString(post.content.rendered);
-          solutionsWrapper.innerHTML += ` <div class="four columns">
+          solutionsWrapper.innerHTML += ` <div id="involved" class="four columns card">
                               <div
                                 class="greennature-item greennature-blog-grid greennature-skin-box"
                               >
@@ -152,7 +151,98 @@ getPostsBySubcategory("getinvolved", "solutions").then((posts) => {
         }
       );
     });
+
+    // Initialize pagination after all posts are appended
+    setTimeout(() => {
+      initializePagination();
+    }, 100); // Small delay to allow DOM updates
+
   } else {
     console.log("No posts found in the specified subcategory");
   }
 });
+
+// Initialize pagination after loading posts
+function initializePagination() {
+  const cardsPerPage = 6; // Adjust as needed
+  const dataContainer = document.getElementById("data-container");
+  const pagination = document.getElementById("pagination");
+  const prevButton = document.getElementById("prev");
+  const nextButton = document.getElementById("next");
+
+  const pageLinksContainer = document.getElementById("page-links"); // Number container
+
+  const cards = Array.from(dataContainer.getElementsByClassName("card"));
+
+  // Calculate total pages
+  const totalPages = Math.ceil(cards.length / cardsPerPage);
+  let currentPage = 1;
+
+  // Function to display the correct set of cards
+  function displayPage(page) {
+    const startIndex = (page - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+
+    cards.forEach((card, index) => {
+      card.style.display =
+        index >= startIndex && index < endIndex ? "block" : "none";
+    });
+
+    updatePagination();
+  }
+
+  // Function to update pagination numbers and buttons
+  function updatePagination() {
+    // Enable/disable prev & next buttons
+    prevButton.style.pointerEvents = currentPage === 1 ? "none" : "auto";
+    nextButton.style.pointerEvents =
+      currentPage === totalPages ? "none" : "auto";
+    prevButton.classList.toggle("disabled", currentPage === 1);
+    nextButton.classList.toggle("disabled", currentPage === totalPages);
+
+    // Clear existing numbers and regenerate
+    pageLinksContainer.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+      const pageLink = document.createElement("a");
+      pageLink.href = "#";
+      pageLink.classList.add("page-numbers", "page-link");
+      pageLink.dataset.page = i;
+      pageLink.textContent = i;
+
+      // Highlight the current page
+      if (i === currentPage) {
+        pageLink.classList.add("current");
+      }
+
+      pageLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        goToPage(i);
+      });
+
+      pageLinksContainer.appendChild(pageLink);
+    }
+  }
+
+  // Function to navigate pages
+  function goToPage(page) {
+    if (page >= 1 && page <= totalPages) {
+      currentPage = page;
+      displayPage(currentPage);
+    }
+  }
+
+  // Event listeners for Prev/Next buttons
+  prevButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage > 1) goToPage(currentPage - 1);
+  });
+
+  nextButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage < totalPages) goToPage(currentPage + 1);
+  });
+
+  // Initial page load
+  displayPage(currentPage);
+}

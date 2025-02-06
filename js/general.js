@@ -110,6 +110,19 @@ getPostsBySubcategory("general-content", "contact-general-content").then(
   }
 );
 
+//contact-footer section
+getPostsBySubcategory("general-content", "contact-general-content").then(
+  (posts) => {
+    const contentWrapper = document.getElementById("contact-contact");
+
+    if (posts.length > 0) {
+      contentWrapper.innerHTML = `<div>${posts[0].content.rendered}</div>`;
+    } else {
+      console.log("No posts found in the specified subcategory");
+    }
+  }
+);
+
 //address section
 getPostsBySubcategory("general-content", "address").then((posts) => {
   const contentWrapper = document.getElementById("address");
@@ -121,6 +134,17 @@ getPostsBySubcategory("general-content", "address").then((posts) => {
   }
 });
 
+
+//address section
+getPostsBySubcategory("general-content", "address").then((posts) => {
+  const contentWrapper = document.getElementById("address-contact");
+
+  if (posts.length > 0) {
+    contentWrapper.innerHTML = `<div>${posts[0].content.rendered}</div>`;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
 //contact section
 getPostsBySubcategory("general-content", "contact-general-content").then(
   (posts) => {
@@ -145,6 +169,17 @@ getPostsBySubcategory("general-content", "email").then((posts) => {
   }
 });
 
+
+//email section
+getPostsBySubcategory("general-content", "email").then((posts) => {
+  const contentWrapper = document.getElementById("email-contact");
+
+  if (posts.length > 0) {
+    contentWrapper.innerHTML = `<span>${posts[0].content.rendered}</span>`;
+  } else {
+    console.log("No posts found in the specified subcategory");
+  }
+});
 //email section
 getPostsBySubcategory("general-content", "email").then((posts) => {
   const contentWrapper = document.getElementById("email-footer");
